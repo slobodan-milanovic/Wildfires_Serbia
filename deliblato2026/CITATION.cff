@@ -1,0 +1,21 @@
+cff-version: 1.2.0
+message: "Ako koristite ove rezultate, citirajte ovako."
+title: "Deliblatska pescara 2026 — rekonstrukcija širenja požara iz satelitskih podataka"
+abstract: >-
+  Rekonstrukcija vremena dolaska vatre, brzine širenja, snage zračenja i
+  ukupne oslobođene energije za požar na Deliblatskoj peščari, avgust 2026,
+  po NERO metodologiji.
+authors:
+  - family-names: POPUNITI
+    given-names: POPUNITI
+    affiliation: POPUNITI
+    # orcid: "https://orcid.org/0000-0000-0000-0000"
+keywords:
+  - wildfire
+  - fire behaviour
+  - rate of spread
+  - fire radiative power
+  - Deliblato Sands
+  - Serbia
+license: CC-BY-4.0
+date-released: POPUNITI

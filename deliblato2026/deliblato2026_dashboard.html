@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="sr"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Deliblatska pescara 2026 — ponašanje požara</title>
+<style>
+  .viz-root {
+    color-scheme: light;
+    --surface-1:#fcfcfb; --surface-2:#f4f3f0;
+    --text-primary:#0b0b0b; --text-secondary:#52514e; --text-muted:#7a7974;
+    --grid:#e6e5e1; --axis:#d5d4d0;
+    --series-1:#2a78d6; --series-2:#eb6834;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:where(:not([data-theme="light"])) .viz-root {
+      color-scheme: dark;
+      --surface-1:#1a1a19; --surface-2:#242423;
+      --text-primary:#ffffff; --text-secondary:#c3c2b7; --text-muted:#8f8e86;
+      --grid:#333331; --axis:#44443f;
+      --series-1:#3987e5; --series-2:#d95926;
+    }
+  }
+  :root[data-theme="dark"] .viz-root {
+    color-scheme: dark;
+    --surface-1:#1a1a19; --surface-2:#242423;
+    --text-primary:#ffffff; --text-secondary:#c3c2b7; --text-muted:#8f8e86;
+    --grid:#333331; --axis:#44443f;
+    --series-1:#3987e5; --series-2:#d95926;
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; font:14px/1.5 ui-sans-serif,system-ui,"Segoe UI",Roboto,sans-serif; }
+  .viz-root { background:var(--surface-1); color:var(--text-primary);
+    min-height:100vh; padding:28px clamp(16px,4vw,48px); }
+  h1 { font-size:20px; margin:0 0 4px; }
+  .sub { color:var(--text-secondary); font-size:13px; margin:0 0 24px; }
+  .tiles { display:grid; gap:12px; grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    margin-bottom:28px; }
+  .tile { background:var(--surface-2); border-radius:10px; padding:14px 16px; }
+  .tile .k { font-size:11px; text-transform:uppercase; letter-spacing:.05em;
+    color:var(--text-muted); margin-bottom:6px; }
+  .tile .v { font-size:26px; font-weight:700; line-height:1.1; }
+  .tile .u { font-size:13px; font-weight:500; color:var(--text-secondary); }
+  .tile .n { font-size:11px; color:var(--text-muted); margin-top:4px; }
+  .chart { margin-bottom:26px; }
+  .chart h2 { font-size:13px; margin:0 0 2px; }
+  .chart .cs { font-size:11px; color:var(--text-muted); margin:0 0 8px; }
+  svg { display:block; width:100%; height:auto; overflow:visible; }
+  .grid line { stroke:var(--grid); stroke-width:1; }
+  .axis line, .axis path { stroke:var(--axis); }
+  .axis text { fill:var(--text-muted); font-size:11px; }
+  .night { fill:currentColor; opacity:.05; }
+  #tip { position:fixed; pointer-events:none; opacity:0; transition:opacity .1s;
+    background:var(--surface-2); border:1px solid var(--axis); border-radius:8px;
+    padding:8px 10px; font-size:12px; box-shadow:0 4px 14px rgba(0,0,0,.16);
+    z-index:10; white-space:nowrap; }
+  #tip b { display:block; margin-bottom:4px; font-size:12px; }
+  .sw { display:inline-block; width:8px; height:8px; border-radius:2px;
+    margin-right:6px; vertical-align:middle; }
+  table { border-collapse:collapse; width:100%; font-size:12px; margin-top:10px; }
+  th,td { text-align:right; padding:6px 10px; border-bottom:1px solid var(--grid); }
+  th:first-child, td:first-child { text-align:left; }
+  th { color:var(--text-muted); font-weight:600; font-size:11px;
+    text-transform:uppercase; letter-spacing:.04em; }
+  details { margin-top:8px; }
+  summary { cursor:pointer; color:var(--text-secondary); font-size:12px;
+    padding:6px 0; }
+  button { background:var(--surface-2); color:var(--text-secondary);
+    border:1px solid var(--axis); border-radius:6px; padding:5px 11px;
+    font:inherit; font-size:12px; cursor:pointer; float:right; }
+</style></head>
+<body><div class="viz-root">
+  <button id="themeBtn">Tema</button>
+  <h1>Deliblatska pescara 2026</h1>
+  <p class="sub">Rekonstrukcija širenja iz Sentinel-2/3 snimaka i MODIS/VIIRS termalnih anomalija · vremena u zoni Europe/Belgrade</p>
+
+  <div class="tiles">
+    <div class="tile"><div class="k">Ukupna površina</div>
+      <div class="v">5.761 <span class="u">ha</span></div>
+      <div class="n">145 rekonstruisanih izohrona</div></div>
+    <div class="tile"><div class="k">Trajanje</div>
+      <div class="v">325 <span class="u">h</span></div>
+      <div class="n">od početka do poslednjeg snimka</div></div>
+    <div class="tile"><div class="k">Najveća brzina širenja</div>
+      <div class="v">5.804 <span class="u">m/h</span></div>
+      <div class="n">2026-08-08 11:30</div></div>
+    <div class="tile"><div class="k">Najveći prirast površine</div>
+      <div class="v">1.757 <span class="u">ha/h</span></div>
+      <div class="n">2026-08-08 11:30</div></div>
+  </div>
+
+  <div class="chart"><h2>Brzina širenja (čelo požara)</h2>
+    <p class="cs">m/h · osenčeno = noć</p><svg id="c1" viewBox="0 0 900 240"></svg></div>
+  <div class="chart"><h2>Brzina prirasta površine</h2>
+    <p class="cs">ha/h · osenčeno = noć</p><svg id="c2" viewBox="0 0 900 240"></svg></div>
+
+  <details><summary>Prikaži tabelu</summary><div id="tbl"></div></details>
+  <div id="tip"></div>
+</div>
+<script>
+const DATA = [{"t": 12.88, "label": "2026-08-06 01:44", "ros": 44.3, "rosMean": 15.3, "growth": 3.29, "cum": 17.9, "inc": 14.8}, {"t": 13.98, "label": "2026-08-06 02:50", "ros": 144.8, "rosMean": 40.9, "growth": 9.98, "cum": 28.9, "inc": 11.0}, {"t": 14.87, "label": "2026-08-06 03:43", "ros": 229.5, "rosMean": 43.7, "growth": 12.09, "cum": 39.6, "inc": 10.7}, {"t": 21.73, "label": "2026-08-06 10:34", "ros": 121.1, "rosMean": 35.0, "growth": 42.84, "cum": 333.6, "inc": 294.0}, {"t": 22.38, "label": "2026-08-06 11:13", "ros": 903.8, "rosMean": 201.3, "growth": 363.66, "cum": 568.1, "inc": 234.5}, {"t": 23.72, "label": "2026-08-06 12:34", "ros": 154.8, "rosMean": 30.5, "growth": 30.55, "cum": 609.0, "inc": 41.0}, {"t": 24.62, "label": "2026-08-06 13:28", "ros": 194.6, "rosMean": 40.9, "growth": 44.19, "cum": 648.8, "inc": 39.8}, {"t": 25.38, "label": "2026-08-06 14:14", "ros": 133.8, "rosMean": 28.5, "growth": 30.46, "cum": 672.2, "inc": 23.4}, {"t": 26.0, "label": "2026-08-06 14:51", "ros": 234.6, "rosMean": 32.9, "growth": 33.08, "cum": 692.6, "inc": 20.4}, {"t": 26.45, "label": "2026-08-06 15:18", "ros": 255.8, "rosMean": 48.3, "growth": 35.09, "cum": 708.4, "inc": 15.8}, {"t": 31.37, "label": "2026-08-06 20:13", "ros": 70.3, "rosMean": 17.1, "growth": 38.36, "cum": 897.0, "inc": 188.6}, {"t": 36.88, "label": "2026-08-07 01:44", "ros": 56.8, "rosMean": 10.8, "growth": 34.65, "cum": 1088.1, "inc": 191.2}, {"t": 37.65, "label": "2026-08-07 02:30", "ros": 157.0, "rosMean": 26.4, "growth": 36.49, "cum": 1116.1, "inc": 28.0}, {"t": 38.23, "label": "2026-08-07 03:05", "ros": 152.4, "rosMean": 28.8, "growth": 34.82, "cum": 1136.4, "inc": 20.3}, {"t": 38.58, "label": "2026-08-07 03:26", "ros": 338.3, "rosMean": 53.8, "growth": 49.33, "cum": 1153.7, "inc": 17.3}, {"t": 39.97, "label": "2026-08-07 04:49", "ros": 138.0, "rosMean": 18.7, "growth": 47.84, "cum": 1219.9, "inc": 66.2}, {"t": 44.92, "label": "2026-08-07 09:46", "ros": 56.7, "rosMean": 13.4, "growth": 38.05, "cum": 1408.2, "inc": 188.3}, {"t": 45.94, "label": "2026-08-07 10:47", "ros": 483.9, "rosMean": 106.0, "growth": 407.64, "cum": 1824.9, "inc": 416.7}, {"t": 47.4, "label": "2026-08-07 12:15", "ros": 64.1, "rosMean": 16.2, "growth": 22.17, "cum": 1857.3, "inc": 32.4}, {"t": 47.97, "label": "2026-08-07 12:49", "ros": 136.9, "rosMean": 29.2, "growth": 27.81, "cum": 1873.1, "inc": 15.8}, {"t": 48.32, "label": "2026-08-07 13:10", "ros": 334.0, "rosMean": 43.2, "growth": 43.81, "cum": 1888.4, "inc": 15.3}, {"t": 49.07, "label": "2026-08-07 13:55", "ros": 93.1, "rosMean": 23.9, "growth": 23.18, "cum": 1905.8, "inc": 17.4}, {"t": 49.68, "label": "2026-08-07 14:32", "ros": 140.1, "rosMean": 29.2, "growth": 21.58, "cum": 1919.1, "inc": 13.3}, {"t": 51.07, "label": "2026-08-07 15:55", "ros": 93.4, "rosMean": 16.4, "growth": 16.81, "cum": 1942.3, "inc": 23.3}, {"t": 56.0, "label": "2026-08-07 20:51", "ros": 36.7, "rosMean": 8.8, "growth": 15.82, "cum": 2020.4, "inc": 78.1}, {"t": 60.58, "label": "2026-08-08 01:26", "ros": 40.3, "rosMean": 8.5, "growth": 18.32, "cum": 2104.4, "inc": 84.0}, {"t": 61.33, "label": "2026-08-08 02:11", "ros": 116.2, "rosMean": 24.2, "growth": 31.52, "cum": 2128.0, "inc": 23.6}, {"t": 62.23, "label": "2026-08-08 03:05", "ros": 288.2, "rosMean": 41.9, "growth": 45.17, "cum": 2168.7, "inc": 40.7}, {"t": 63.02, "label": "2026-08-08 03:52", "ros": 251.3, "rosMean": 31.7, "growth": 41.03, "cum": 2200.8, "inc": 32.1}, {"t": 64.65, "label": "2026-08-08 05:30", "ros": 96.4, "rosMean": 17.5, "growth": 28.59, "cum": 2247.5, "inc": 46.7}, {"t": 69.5, "label": "2026-08-08 10:21", "ros": 234.9, "rosMean": 31.9, "growth": 41.16, "cum": 2447.3, "inc": 199.7}, {"t": 70.54, "label": "2026-08-08 11:23", "ros": 155.5, "rosMean": 22.0, "growth": 29.93, "cum": 2478.4, "inc": 31.1}, {"t": 70.65, "label": "2026-08-08 11:30", "ros": 5297.3, "rosMean": 962.1, "growth": 1756.97, "cum": 2669.7, "inc": 191.3}, {"t": 70.66, "label": "2026-08-08 11:30", "ros": 5803.6, "rosMean": 1610.5, "growth": 1394.52, "cum": 2680.9, "inc": 11.2}, {"t": 72.0, "label": "2026-08-08 12:51", "ros": 334.7, "rosMean": 42.2, "growth": 42.72, "cum": 2738.2, "inc": 57.3}, {"t": 72.75, "label": "2026-08-08 13:36", "ros": 154.4, "rosMean": 29.9, "growth": 31.98, "cum": 2762.2, "inc": 24.0}, {"t": 73.35, "label": "2026-08-08 14:12", "ros": 308.6, "rosMean": 38.6, "growth": 14.06, "cum": 2770.6, "inc": 8.4}, {"t": 73.68, "label": "2026-08-08 14:32", "ros": 327.7, "rosMean": 69.3, "growth": 23.3, "cum": 2778.4, "inc": 7.8}, {"t": 74.1, "label": "2026-08-08 14:57", "ros": 479.1, "rosMean": 81.0, "growth": 21.26, "cum": 2787.3, "inc": 8.9}, {"t": 79.05, "label": "2026-08-08 19:54", "ros": 64.7, "rosMean": 9.9, "growth": 13.62, "cum": 2854.7, "inc": 67.4}, {"t": 80.68, "label": "2026-08-08 21:32", "ros": 59.3, "rosMean": 12.2, "growth": 12.06, "cum": 2874.4, "inc": 19.7}, {"t": 85.02, "label": "2026-08-09 01:52", "ros": 55.0, "rosMean": 7.2, "growth": 9.62, "cum": 2916.0, "inc": 41.7}, {"t": 85.62, "label": "2026-08-09 02:28", "ros": 75.3, "rosMean": 26.1, "growth": 12.95, "cum": 2923.8, "inc": 7.8}, {"t": 85.95, "label": "2026-08-09 02:48", "ros": 106.7, "rosMean": 36.4, "growth": 19.44, "cum": 2930.3, "inc": 6.5}, {"t": 86.68, "label": "2026-08-09 03:32", "ros": 57.3, "rosMean": 21.4, "growth": 10.13, "cum": 2937.7, "inc": 7.4}, {"t": 93.05, "label": "2026-08-09 09:54", "ros": 110.6, "rosMean": 11.4, "growth": 40.9, "cum": 3198.1, "inc": 260.4}, {"t": 94.1, "label": "2026-08-09 10:57", "ros": 36.2, "rosMean": 12.7, "growth": 6.6, "cum": 3205.1, "inc": 7.0}, {"t": 96.47, "label": "2026-08-09 13:19", "ros": 25.0, "rosMean": 5.9, "growth": 3.92, "cum": 3214.4, "inc": 9.3}, {"t": 98.7, "label": "2026-08-09 15:33", "ros": 20.1, "rosMean": 6.0, "growth": 3.03, "cum": 3221.1, "inc": 6.8}, {"t": 103.68, "label": "2026-08-09 20:32", "ros": 9.8, "rosMean": 3.1, "growth": 2.68, "cum": 3234.5, "inc": 13.3}, {"t": 108.7, "label": "2026-08-10 01:33", "ros": 13.3, "rosMean": 3.3, "growth": 2.23, "cum": 3245.6, "inc": 11.2}, {"t": 110.37, "label": "2026-08-10 03:13", "ros": 25.6, "rosMean": 8.6, "growth": 4.15, "cum": 3252.6, "inc": 6.9}, {"t": 116.8, "label": "2026-08-10 09:39", "ros": 30.2, "rosMean": 5.0, "growth": 5.23, "cum": 3286.2, "inc": 33.6}, {"t": 118.31, "label": "2026-08-10 11:09", "ros": 27.3, "rosMean": 9.4, "growth": 5.0, "cum": 3293.7, "inc": 7.6}, {"t": 119.37, "label": "2026-08-10 12:13", "ros": 27.2, "rosMean": 11.4, "growth": 5.39, "cum": 3299.4, "inc": 5.7}, {"t": 121.03, "label": "2026-08-10 13:53", "ros": 48.6, "rosMean": 10.2, "growth": 4.43, "cum": 3306.8, "inc": 7.4}, {"t": 123.35, "label": "2026-08-10 16:12", "ros": 33.5, "rosMean": 7.3, "growth": 4.36, "cum": 3316.9, "inc": 10.1}, {"t": 133.3, "label": "2026-08-11 02:09", "ros": 16.6, "rosMean": 3.4, "growth": 5.03, "cum": 3367.0, "inc": 50.1}, {"t": 134.08, "label": "2026-08-11 02:56", "ros": 62.3, "rosMean": 20.1, "growth": 7.6, "cum": 3373.0, "inc": 6.0}, {"t": 141.88, "label": "2026-08-11 10:43", "ros": 13.6, "rosMean": 3.4, "growth": 5.47, "cum": 3415.6, "inc": 42.6}, {"t": 143.83, "label": "2026-08-11 12:41", "ros": 27.7, "rosMean": 7.7, "growth": 7.32, "cum": 3429.9, "inc": 14.3}, {"t": 144.72, "label": "2026-08-11 13:34", "ros": 83.4, "rosMean": 17.0, "growth": 8.12, "cum": 3437.1, "inc": 7.2}, {"t": 146.35, "label": "2026-08-11 15:12", "ros": 39.6, "rosMean": 8.9, "growth": 6.23, "cum": 3447.3, "inc": 10.2}, {"t": 146.88, "label": "2026-08-11 15:44", "ros": 573.5, "rosMean": 99.5, "growth": 67.26, "cum": 3483.1, "inc": 35.9}, {"t": 157.02, "label": "2026-08-12 01:52", "ros": 14.8, "rosMean": 3.2, "growth": 3.64, "cum": 3520.0, "inc": 36.8}, {"t": 158.33, "label": "2026-08-12 03:11", "ros": 31.9, "rosMean": 10.8, "growth": 4.59, "cum": 3526.0, "inc": 6.0}, {"t": 166.48, "label": "2026-08-12 11:19", "ros": 19.6, "rosMean": 2.7, "growth": 17.66, "cum": 3669.9, "inc": 143.8}, {"t": 167.5, "label": "2026-08-12 12:21", "ros": 54.0, "rosMean": 13.1, "growth": 20.26, "cum": 3690.5, "inc": 20.7}, {"t": 168.4, "label": "2026-08-12 13:15", "ros": 42.4, "rosMean": 16.3, "growth": 11.81, "cum": 3701.2, "inc": 10.6}, {"t": 169.18, "label": "2026-08-12 14:02", "ros": 51.3, "rosMean": 18.9, "growth": 9.05, "cum": 3708.3, "inc": 7.1}, {"t": 170.62, "label": "2026-08-12 15:28", "ros": 78.8, "rosMean": 16.8, "growth": 7.45, "cum": 3718.9, "inc": 10.7}, {"t": 176.0, "label": "2026-08-12 20:51", "ros": 24.5, "rosMean": 4.9, "growth": 4.89, "cum": 3745.3, "inc": 26.3}, {"t": 180.67, "label": "2026-08-13 01:31", "ros": 30.1, "rosMean": 5.8, "growth": 5.0, "cum": 3768.6, "inc": 23.3}, {"t": 181.45, "label": "2026-08-13 02:18", "ros": 52.2, "rosMean": 18.8, "growth": 7.88, "cum": 3774.7, "inc": 6.2}, {"t": 182.33, "label": "2026-08-13 03:11", "ros": 84.5, "rosMean": 22.9, "growth": 8.06, "cum": 3781.9, "inc": 7.1}, {"t": 189.55, "label": "2026-08-13 10:24", "ros": 21.1, "rosMean": 5.1, "growth": 7.26, "cum": 3834.2, "inc": 52.4}, {"t": 190.04, "label": "2026-08-13 10:53", "ros": 279.1, "rosMean": 59.3, "growth": 95.98, "cum": 3881.5, "inc": 47.3}, {"t": 190.66, "label": "2026-08-13 11:30", "ros": 204.2, "rosMean": 45.1, "growth": 52.06, "cum": 3913.6, "inc": 32.1}, {"t": 191.02, "label": "2026-08-13 11:52", "ros": 375.9, "rosMean": 77.7, "growth": 83.27, "cum": 3943.4, "inc": 29.8}, {"t": 192.85, "label": "2026-08-13 13:42", "ros": 54.8, "rosMean": 8.3, "growth": 6.21, "cum": 3954.8, "inc": 11.4}, {"t": 193.97, "label": "2026-08-13 14:49", "ros": 98.5, "rosMean": 16.7, "growth": 7.09, "cum": 3962.7, "inc": 7.9}, {"t": 195.6, "label": "2026-08-13 16:27", "ros": 61.6, "rosMean": 14.1, "growth": 10.55, "cum": 3979.9, "inc": 17.2}, {"t": 199.02, "label": "2026-08-13 19:52", "ros": 35.3, "rosMean": 6.7, "growth": 9.27, "cum": 4011.6, "inc": 31.7}, {"t": 200.65, "label": "2026-08-13 21:30", "ros": 40.7, "rosMean": 11.3, "growth": 10.12, "cum": 4028.1, "inc": 16.5}, {"t": 205.12, "label": "2026-08-14 01:58", "ros": 33.6, "rosMean": 6.7, "growth": 10.68, "cum": 4075.8, "inc": 47.7}, {"t": 206.05, "label": "2026-08-14 02:54", "ros": 97.4, "rosMean": 23.2, "growth": 15.88, "cum": 4090.6, "inc": 14.8}, {"t": 206.8, "label": "2026-08-14 03:39", "ros": 88.5, "rosMean": 25.1, "growth": 17.06, "cum": 4103.4, "inc": 12.8}, {"t": 207.5, "label": "2026-08-14 04:21", "ros": 105.2, "rosMean": 25.0, "growth": 14.91, "cum": 4113.9, "inc": 10.4}, {"t": 211.7, "label": "2026-08-14 08:33", "ros": 34.0, "rosMean": 7.6, "growth": 19.06, "cum": 4193.9, "inc": 80.1}, {"t": 212.55, "label": "2026-08-14 09:24", "ros": 84.4, "rosMean": 18.4, "growth": 10.23, "cum": 4202.6, "inc": 8.7}, {"t": 213.61, "label": "2026-08-14 10:27", "ros": 139.3, "rosMean": 18.0, "growth": 30.11, "cum": 4234.4, "inc": 31.8}, {"t": 214.25, "label": "2026-08-14 11:06", "ros": 333.0, "rosMean": 48.0, "growth": 53.05, "cum": 4268.6, "inc": 34.2}, {"t": 215.78, "label": "2026-08-14 12:38", "ros": 42.7, "rosMean": 12.8, "growth": 9.83, "cum": 4283.7, "inc": 15.1}, {"t": 216.53, "label": "2026-08-14 13:23", "ros": 60.0, "rosMean": 18.3, "growth": 10.22, "cum": 4291.4, "inc": 7.7}, {"t": 217.47, "label": "2026-08-14 14:19", "ros": 83.0, "rosMean": 20.4, "growth": 12.53, "cum": 4303.0, "inc": 11.7}, {"t": 218.6, "label": "2026-08-14 15:27", "ros": 53.2, "rosMean": 15.2, "growth": 10.56, "cum": 4315.0, "inc": 12.0}, {"t": 223.68, "label": "2026-08-14 20:32", "ros": 26.0, "rosMean": 5.0, "growth": 9.79, "cum": 4364.8, "inc": 49.8}, {"t": 228.8, "label": "2026-08-15 01:39", "ros": 18.1, "rosMean": 5.5, "growth": 10.82, "cum": 4420.1, "inc": 55.4}, {"t": 229.42, "label": "2026-08-15 02:16", "ros": 102.1, "rosMean": 28.2, "growth": 17.69, "cum": 4431.1, "inc": 10.9}, {"t": 229.77, "label": "2026-08-15 02:37", "ros": 128.4, "rosMean": 50.8, "growth": 18.62, "cum": 4437.6, "inc": 6.5}, {"t": 230.48, "label": "2026-08-15 03:20", "ros": 122.3, "rosMean": 24.9, "growth": 18.81, "cum": 4451.1, "inc": 13.5}, {"t": 231.08, "label": "2026-08-15 03:56", "ros": 79.8, "rosMean": 30.0, "growth": 20.81, "cum": 4463.5, "inc": 12.5}, {"t": 232.15, "label": "2026-08-15 05:00", "ros": 52.6, "rosMean": 14.8, "growth": 16.2, "cum": 4480.8, "inc": 17.3}, {"t": 237.08, "label": "2026-08-15 09:56", "ros": 20.0, "rosMean": 5.3, "growth": 15.0, "cum": 4554.8, "inc": 74.0}, {"t": 237.81, "label": "2026-08-15 10:39", "ros": 207.0, "rosMean": 36.0, "growth": 41.54, "cum": 4585.2, "inc": 30.4}, {"t": 238.66, "label": "2026-08-15 11:30", "ros": 209.1, "rosMean": 38.0, "growth": 24.82, "cum": 4606.3, "inc": 21.1}, {"t": 239.47, "label": "2026-08-15 12:19", "ros": 68.7, "rosMean": 20.7, "growth": 12.44, "cum": 4616.3, "inc": 10.0}, {"t": 240.22, "label": "2026-08-15 13:04", "ros": 132.2, "rosMean": 21.7, "growth": 21.21, "cum": 4632.2, "inc": 15.9}, {"t": 240.82, "label": "2026-08-15 13:40", "ros": 134.0, "rosMean": 34.6, "growth": 13.33, "cum": 4640.2, "inc": 8.0}, {"t": 241.15, "label": "2026-08-15 14:00", "ros": 301.4, "rosMean": 56.8, "growth": 19.82, "cum": 4646.8, "inc": 6.6}, {"t": 243.23, "label": "2026-08-15 16:05", "ros": 48.3, "rosMean": 9.9, "growth": 8.22, "cum": 4663.9, "inc": 17.1}, {"t": 248.32, "label": "2026-08-15 21:10", "ros": 25.4, "rosMean": 6.2, "growth": 8.17, "cum": 4705.4, "inc": 41.5}, {"t": 252.48, "label": "2026-08-16 01:20", "ros": 27.6, "rosMean": 6.6, "growth": 8.66, "cum": 4741.5, "inc": 36.1}, {"t": 253.42, "label": "2026-08-16 02:16", "ros": 84.8, "rosMean": 18.4, "growth": 12.92, "cum": 4753.6, "inc": 12.1}, {"t": 254.18, "label": "2026-08-16 03:02", "ros": 78.7, "rosMean": 25.3, "growth": 16.92, "cum": 4766.6, "inc": 13.0}, {"t": 255.08, "label": "2026-08-16 03:56", "ros": 115.6, "rosMean": 26.5, "growth": 20.6, "cum": 4785.1, "inc": 18.5}, {"t": 259.17, "label": "2026-08-16 08:01", "ros": 56.9, "rosMean": 9.3, "growth": 24.08, "cum": 4883.4, "inc": 98.3}, {"t": 261.83, "label": "2026-08-16 10:41", "ros": 37.2, "rosMean": 8.9, "growth": 17.13, "cum": 4929.1, "inc": 45.7}, {"t": 262.42, "label": "2026-08-16 11:15", "ros": 172.4, "rosMean": 32.8, "growth": 28.11, "cum": 4945.5, "inc": 16.4}, {"t": 263.9, "label": "2026-08-16 12:45", "ros": 154.2, "rosMean": 22.2, "growth": 22.42, "cum": 4978.8, "inc": 33.3}, {"t": 264.5, "label": "2026-08-16 13:21", "ros": 256.8, "rosMean": 39.5, "growth": 30.68, "cum": 4997.2, "inc": 18.4}, {"t": 264.85, "label": "2026-08-16 13:42", "ros": 455.9, "rosMean": 80.8, "growth": 37.42, "cum": 5010.3, "inc": 13.1}, {"t": 265.57, "label": "2026-08-16 14:25", "ros": 176.7, "rosMean": 41.5, "growth": 32.71, "cum": 5033.7, "inc": 23.4}, {"t": 266.22, "label": "2026-08-16 15:04", "ros": 176.8, "rosMean": 35.4, "growth": 27.51, "cum": 5051.6, "inc": 17.9}, {"t": 271.33, "label": "2026-08-16 20:11", "ros": 27.1, "rosMean": 5.6, "growth": 9.51, "cum": 5100.2, "inc": 48.7}, {"t": 276.77, "label": "2026-08-17 01:37", "ros": 35.8, "rosMean": 7.4, "growth": 8.59, "cum": 5146.9, "inc": 46.7}, {"t": 277.12, "label": "2026-08-17 01:58", "ros": 324.9, "rosMean": 85.0, "growth": 37.76, "cum": 5160.2, "inc": 13.2}, {"t": 277.83, "label": "2026-08-17 02:41", "ros": 201.7, "rosMean": 42.6, "growth": 54.35, "cum": 5199.1, "inc": 39.0}, {"t": 278.43, "label": "2026-08-17 03:17", "ros": 182.1, "rosMean": 44.9, "growth": 51.79, "cum": 5230.2, "inc": 31.1}, {"t": 278.8, "label": "2026-08-17 03:39", "ros": 252.5, "rosMean": 81.4, "growth": 42.03, "cum": 5245.6, "inc": 15.4}, {"t": 279.75, "label": "2026-08-17 04:36", "ros": 95.3, "rosMean": 24.4, "growth": 26.48, "cum": 5270.7, "inc": 25.2}, {"t": 284.88, "label": "2026-08-17 09:44", "ros": 29.0, "rosMean": 7.0, "growth": 15.08, "cum": 5348.2, "inc": 77.4}, {"t": 285.98, "label": "2026-08-17 10:49", "ros": 170.2, "rosMean": 41.2, "growth": 46.66, "cum": 5399.3, "inc": 51.2}, {"t": 286.83, "label": "2026-08-17 11:41", "ros": 205.4, "rosMean": 42.8, "growth": 76.89, "cum": 5464.9, "inc": 65.6}, {"t": 287.62, "label": "2026-08-17 12:28", "ros": 217.5, "rosMean": 43.6, "growth": 42.68, "cum": 5498.4, "inc": 33.4}, {"t": 288.5, "label": "2026-08-17 13:21", "ros": 190.2, "rosMean": 42.7, "growth": 55.47, "cum": 5547.4, "inc": 49.0}, {"t": 289.28, "label": "2026-08-17 14:08", "ros": 234.4, "rosMean": 44.3, "growth": 49.93, "cum": 5586.5, "inc": 39.1}, {"t": 289.88, "label": "2026-08-17 14:44", "ros": 193.1, "rosMean": 48.3, "growth": 37.05, "cum": 5608.7, "inc": 22.2}, {"t": 290.88, "label": "2026-08-17 15:44", "ros": 103.9, "rosMean": 29.0, "growth": 20.05, "cum": 5628.8, "inc": 20.0}, {"t": 295.97, "label": "2026-08-17 20:49", "ros": 39.8, "rosMean": 9.1, "growth": 10.66, "cum": 5682.9, "inc": 54.2}, {"t": 304.4, "label": "2026-08-18 05:15", "ros": 21.8, "rosMean": 4.1, "growth": 4.72, "cum": 5722.8, "inc": 39.8}, {"t": 309.54, "label": "2026-08-18 10:23", "ros": 21.4, "rosMean": 6.5, "growth": 2.33, "cum": 5734.8, "inc": 12.0}, {"t": 310.18, "label": "2026-08-18 11:02", "ros": 199.3, "rosMean": 44.4, "growth": 40.91, "cum": 5760.9, "inc": 26.2}, {"t": 325.13, "label": "2026-08-19 01:59", "ros": 0.0, "rosMean": 0.0, "growth": 0.0, "cum": 5760.9, "inc": 0.0}];
+// Noćni intervali u satima od nastanka požara, izračunati u Pythonu (_night_spans)
+// uz pravu vremensku zonu i letnje računanje vremena.
+const NIGHT = [[7.25, 17.25], [31.25, 41.25], [55.25, 65.25], [79.25, 89.25], [103.25, 113.25], [127.25, 137.25], [151.25, 161.25], [175.25, 185.25], [199.25, 209.25], [223.25, 233.25], [247.25, 257.25], [271.25, 281.25], [295.25, 305.25], [319.25, 325.25]];
+const NS = "http://www.w3.org/2000/svg";
+const el = (n, a = {}) => { const e = document.createElementNS(NS, n);
+  for (const k in a) e.setAttribute(k, a[k]); return e; };
+const fmt = v => v.toLocaleString("sr-RS", {maximumFractionDigits: 0});
+
+function draw(id, key, colorVar, unit) {
+  const svg = document.getElementById(id);
+  svg.innerHTML = "";
+  const W = 900, H = 240, M = {t: 14, r: 18, b: 30, l: 56};
+  const iw = W - M.l - M.r, ih = H - M.t - M.b;
+  const xs = DATA.map(d => d.t), ys = DATA.map(d => d[key]);
+  const x0 = Math.min(...xs), x1 = Math.max(...xs);
+  const y1 = Math.max(...ys) * 1.15 || 1;
+  const X = v => M.l + (v - x0) / ((x1 - x0) || 1) * iw;
+  const Y = v => M.t + ih - v / y1 * ih;
+  const color = getComputedStyle(document.querySelector(".viz-root"))
+                  .getPropertyValue(colorVar).trim();
+
+  // Noćne trake. Intervali dolaze IZ PYTHONA (_night_spans) — isti oni koje
+  // crta i PNG grafikon, da se dve slike ne bi razlikovale.
+  //
+  // Ranije je ovde stajalo `hourOfDay = h % 24`, gde je h broj sati OD
+  // PALJENJA, a ne doba dana. To je tačno samo ako je požar počeo tačno u
+  // ponoć po lokalnom vremenu. Deliblato je počeo u 12:51 po lokalnom, pa je
+  // senčenje bilo pomereno za ~12,9 h — dan i noć su bili zamenjeni, i
+  // dashboard je pokazivao da je širenje najbrže noću.
+  const night = el("g", {class: "night"});
+  for (const [a, b] of NIGHT) {
+    const s = Math.max(a, x0), e = Math.min(b, x1);
+    if (e > s)
+      night.appendChild(el("rect", {x: X(s), y: M.t,
+        width: Math.max(1, X(e) - X(s)), height: ih}));
+  }
+  svg.appendChild(night);
+
+  const g = el("g", {class: "grid"});
+  const ticks = 4;
+  for (let i = 0; i <= ticks; i++) {
+    const v = y1 * i / ticks;
+    g.appendChild(el("line", {x1: M.l, x2: W - M.r, y1: Y(v), y2: Y(v)}));
+    const t = el("text", {x: M.l - 9, y: Y(v) + 4, "text-anchor": "end"});
+    t.textContent = fmt(v); t.setAttribute("class", "axis"); g.appendChild(t);
+  }
+  svg.appendChild(g);
+
+  const ax = el("g", {class: "axis"});
+  let lastLabel = -99;
+  DATA.forEach(d => {
+    if (d.t - lastLabel < (x1 - x0) / 9) return;
+    lastLabel = d.t;
+    const t = el("text", {x: X(d.t), y: H - 8, "text-anchor": "middle"});
+    t.textContent = d.label.slice(8, 10) + "." + d.label.slice(5, 7) + ".";
+    ax.appendChild(t);
+  });
+  svg.appendChild(ax);
+
+  const path = el("path", {
+    d: DATA.map((d, i) => (i ? "L" : "M") + X(d.t) + " " + Y(d[key])).join(" "),
+    fill: "none", stroke: color, "stroke-width": 2,
+    "stroke-linecap": "round", "stroke-linejoin": "round"});
+  svg.appendChild(path);
+
+  const surface = getComputedStyle(document.querySelector(".viz-root"))
+                    .getPropertyValue("--surface-1").trim();
+  DATA.forEach(d => {
+    svg.appendChild(el("circle", {cx: X(d.t), cy: Y(d[key]), r: 4.5,
+      fill: color, stroke: surface, "stroke-width": 2}));
+    const hit = el("circle", {cx: X(d.t), cy: Y(d[key]), r: 14,
+      fill: "transparent"});
+    hit.addEventListener("pointerenter", ev => show(ev, d, color));
+    hit.addEventListener("pointerleave", hide);
+    svg.appendChild(hit);
+  });
+
+  // direktna oznaka samo na vrhu
+  const im = ys.indexOf(Math.max(...ys));
+  const lbl = el("text", {x: X(DATA[im].t), y: Y(ys[im]) - 11,
+    "text-anchor": "middle", "font-size": 11, "font-weight": 700});
+  lbl.setAttribute("fill", "var(--text-primary)");
+  lbl.textContent = fmt(ys[im]) + " " + unit;
+  svg.appendChild(lbl);
+}
+
+const tip = document.getElementById("tip");
+function show(ev, d, color) {
+  tip.innerHTML = "<b>" + d.label + "</b>" +
+    '<span class="sw" style="background:' + color + '"></span>' +
+    "brzina širenja: " + fmt(d.ros) + " m/h<br>" +
+    '<span class="sw" style="background:transparent"></span>' +
+    "prirast: " + fmt(d.growth) + " ha/h · " + fmt(d.inc) + " ha<br>" +
+    '<span class="sw" style="background:transparent"></span>' +
+    "ukupno: " + fmt(d.cum) + " ha";
+  tip.style.opacity = 1;
+  tip.style.left = Math.min(ev.clientX + 14, innerWidth - 230) + "px";
+  tip.style.top = (ev.clientY - 10) + "px";
+}
+function hide() { tip.style.opacity = 0; }
+
+function table() {
+  const rows = DATA.map(d => "<tr><td>" + d.label + "</td><td>" + fmt(d.ros) +
+    "</td><td>" + fmt(d.rosMean) + "</td><td>" + d.growth.toFixed(1) +
+    "</td><td>" + fmt(d.inc) + "</td><td>" + fmt(d.cum) + "</td></tr>").join("");
+  document.getElementById("tbl").innerHTML =
+    "<table><thead><tr><th>Vreme</th><th>ROS max (m/h)</th>" +
+    "<th>ROS sred. (m/h)</th><th>Prirast (ha/h)</th><th>Prirast (ha)</th>" +
+    "<th>Ukupno (ha)</th></tr></thead><tbody>" + rows + "</tbody></table>";
+}
+
+function render() {
+  draw("c1", "ros", "--series-1", "m/h");
+  draw("c2", "growth", "--series-2", "ha/h");
+}
+document.getElementById("themeBtn").addEventListener("click", () => {
+  const cur = document.documentElement.getAttribute("data-theme");
+  const dark = cur ? cur === "dark"
+    : matchMedia("(prefers-color-scheme: dark)").matches;
+  document.documentElement.setAttribute("data-theme", dark ? "light" : "dark");
+  render();
+});
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change", render);
+render(); table();
+</script></body></html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="sr"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Deliblatska pescara 2026 — rekonstrukcija širenja požara</title>
+<meta name="description" content="Rekonstrukcija širenja požara iz satelitskih podataka: izohrone, brzina širenja, snaga zračenja i oslobođena energija.">
+<style>
+:root { color-scheme: light dark;
+  --surface-1:#fcfcfb; --surface-2:#f2f1ee; --text-1:#0b0b0b;
+  --text-2:#52514e; --muted:#8a8880; --grid:#e6e5e1;
+  --blue:#2a78d6; --orange:#c24d1f; }
+@media (prefers-color-scheme: dark) { :root {
+  --surface-1:#1a1a19; --surface-2:#252523; --text-1:#fff;
+  --text-2:#c3c2b7; --muted:#8f8e86; --grid:#333230; } }
+* { box-sizing:border-box; }
+body { margin:0; background:var(--surface-1); color:var(--text-1);
+  font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,sans-serif; }
+.wrap { max-width:1080px; margin:0 auto; padding:32px clamp(16px,4vw,40px) 64px; }
+header { display:flex; justify-content:space-between; align-items:flex-start;
+  gap:16px; flex-wrap:wrap; }
+h1 { font-size:clamp(22px,3.4vw,30px); margin:0 0 4px; letter-spacing:-.01em; }
+.sub { color:var(--text-2); margin:0 0 4px; font-size:15px; }
+.lang button { font:inherit; font-size:13px; font-weight:600; padding:5px 11px;
+  border:1px solid var(--grid); background:var(--surface-2); color:var(--text-2);
+  cursor:pointer; }
+.lang button:first-child { border-radius:7px 0 0 7px; }
+.lang button:last-child { border-radius:0 7px 7px 0; border-left:none; }
+.lang button[aria-pressed="true"] { background:var(--text-1);
+  color:var(--surface-1); border-color:var(--text-1); }
+.tiles { display:grid; gap:10px; margin:26px 0 8px;
+  grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); }
+.tile { background:var(--surface-2); border-radius:10px; padding:13px 15px; }
+.tile .v { font-size:25px; font-weight:700; line-height:1.1; }
+.tile .u { font-size:13px; font-weight:600; color:var(--text-2); }
+.tile .k { font-size:11px; text-transform:uppercase; letter-spacing:.05em;
+  color:var(--muted); margin-top:5px; }
+.card { border-top:1px solid var(--grid); padding-top:26px; margin-top:34px; }
+.card h2 { font-size:19px; margin:0 0 4px; }
+.card p { color:var(--text-2); margin:0 0 16px; max-width:62ch; font-size:15px; }
+.media { background:var(--surface-2); border-radius:12px; overflow:hidden;
+  border:1px solid var(--grid); }
+iframe { width:100%; height:min(78vh,780px); border:0; display:block;
+  background:var(--surface-1); }
+img, video { width:100%; height:auto; display:block; }
+a.open { display:inline-block; margin-top:12px; font-weight:600; font-size:15px;
+  color:var(--orange); text-decoration:none; }
+a.open:hover { text-decoration:underline; }
+footer { border-top:1px solid var(--grid); margin-top:44px; padding-top:22px;
+  color:var(--text-2); font-size:13.5px; }
+footer h3 { font-size:14px; margin:0 0 8px; color:var(--text-1); }
+footer ul { margin:0 0 18px; padding-left:20px; }
+footer li { margin-bottom:5px; }
+footer a { color:var(--text-2); }
+.note { background:var(--surface-2); border-left:3px solid var(--orange);
+  border-radius:0 8px 8px 0; padding:13px 16px; margin:22px 0 0;
+  font-size:14px; color:var(--text-2); }
+</style></head><body><div class="wrap">
+
+<header>
+  <div>
+    <h1>Deliblatska pescara 2026</h1>
+    <p class="sub" data-sr="Rekonstrukcija širenja požara iz satelitskih podataka"
+       data-en="Satellite-based reconstruction of fire spread">Rekonstrukcija širenja požara iz satelitskih podataka</p>
+  </div>
+  <div class="lang">
+    <button id="b-sr" aria-pressed="true">SR</button><button id="b-en" aria-pressed="false">EN</button>
+  </div>
+</header>
+
+<div class="tiles">
+      <div class="tile"><div class="v">5 402<span class="u" data-sr=" ha" data-en=" ha"> ha</span></div><div class="k" data-sr="Opožarena površina" data-en="Burned area">Opožarena površina</div></div>
+      <div class="tile"><div class="v">13,5<span class="u" data-sr=" dana" data-en=" days"> dana</span></div><div class="k" data-sr="Trajanje širenja" data-en="Spread duration">Trajanje širenja</div></div>
+      <div class="tile"><div class="v">5 804<span class="u" data-sr=" m/h" data-en=" m/h"> m/h</span></div><div class="k" data-sr="Najveća brzina čela" data-en="Peak head ROS">Najveća brzina čela</div></div>
+      <div class="tile"><div class="v">341,3<span class="u" data-sr=" TJ" data-en=" TJ"> TJ</span></div><div class="k" data-sr="Oslobođena energija" data-en="Released energy">Oslobođena energija</div></div>
+      <div class="tile"><div class="v">1 806<span class="u" data-sr=" " data-en=" "> </span></div><div class="k" data-sr="Termalnih detekcija" data-en="Thermal detections">Termalnih detekcija</div></div>
+      <div class="tile"><div class="v">125 589<span class="u" data-sr=" t" data-en=" t"> t</span></div><div class="k" data-sr="Procena sagorele biomase" data-en="Estimated biomass burned">Procena sagorele biomase</div></div>
+</div>
+
+<p class="note" data-sr="Ukupna oslobođena energija je vremenski integral snage do poslednjeg validnog perimetra (t = 311 h. Sentinel-2). Satelit područje vidi samo pri prolazu. pa je 10 % integrala interpolirano preko praznina dužih od 8 h — vrednost je donja granica. ne zatvoren energetski bilans." data-en="Total released energy is the time integral of power up to the last valid perimeter (t = 311 h, Sentinel-2). Polar-orbiting satellites see the area only at overpass, so 10 % of the integral is interpolated across gaps longer than 8 h — the value is a lower bound, not a closed energy budget.">Ukupna oslobođena energija je vremenski integral snage do poslednjeg validnog perimetra (t = 311 h. Sentinel-2). Satelit područje vidi samo pri prolazu. pa je 10 % integrala interpolirano preko praznina dužih od 8 h — vrednost je donja granica. ne zatvoren energetski bilans.</p>
+
+    <section class="card">
+      <h2 data-sr="FRP kroz vreme i prostor" data-en="Fire radiative power in time and space">FRP kroz vreme i prostor</h2>
+      <p data-sr="Interaktivna mapa: klizač po satelitskim prolazima, snaga zračenja po detekciji, ukupna oslobođena energija i mapa najvećeg izmerenog intenziteta." data-en="Interactive map: slider over satellite overpasses, radiative power per detection, total released energy and a map of maximum measured intensity.">Interaktivna mapa: klizač po satelitskim prolazima, snaga zračenja po detekciji, ukupna oslobođena energija i mapa najvećeg izmerenog intenziteta.</p>
+      <div class="media"><iframe src="deliblato2026_frp.html" loading="lazy" title="FRP kroz vreme i prostor"></iframe></div>
+      <a class="open" href="deliblato2026_frp.html" target="_blank" rel="noopener" data-sr="Otvori →" data-en="Open →">Otvori →</a>
+    </section>
+    <section class="card">
+      <h2 data-sr="Ponašanje požara — kontrolna tabla" data-en="Fire behaviour dashboard">Ponašanje požara — kontrolna tabla</h2>
+      <p data-sr="Brzina širenja i prirast površine kroz vreme, sa osenčenim noćnim periodima." data-en="Rate of spread and area growth over time, with night periods shaded.">Brzina širenja i prirast površine kroz vreme, sa osenčenim noćnim periodima.</p>
+      <div class="media"><iframe src="deliblato2026_dashboard.html" loading="lazy" title="Ponašanje požara — kontrolna tabla"></iframe></div>
+      <a class="open" href="deliblato2026_dashboard.html" target="_blank" rel="noopener" data-sr="Otvori →" data-en="Open →">Otvori →</a>
+    </section>
+    <section class="card">
+      <h2 data-sr="Animacija širenja" data-en="Spread animation">Animacija širenja</h2>
+      <p data-sr="Rekonstruisano širenje požara po izohronama, na Sentinel-2 podlozi." data-en="Reconstructed fire spread by isochrones, over a Sentinel-2 basemap.">Rekonstruisano širenje požara po izohronama, na Sentinel-2 podlozi.</p>
+      <div class="media"><video src="deliblato2026_animacija.mp4" controls loop muted playsinline></video></div>
+      <a class="open" href="deliblato2026_animacija.mp4" download data-sr="Preuzmi MP4 ↓" data-en="Download MP4 ↓">Preuzmi MP4 ↓</a>
+    </section>
+    <section class="card">
+      <h2 data-sr="Brzina širenja i rast površine" data-en="Rate of spread and area growth">Brzina širenja i rast površine</h2>
+      <p data-sr="Dva grafikona sa zajedničkom vremenskom osom." data-en="Two panels sharing a common time axis.">Dva grafikona sa zajedničkom vremenskom osom.</p>
+      <div class="media"><img src="deliblato2026_fire_behavior.png" loading="lazy" alt="Brzina širenja i rast površine"></div>
+      <a class="open" href="deliblato2026_fire_behavior.png" target="_blank" rel="noopener" data-sr="Puna veličina →" data-en="Full size →">Puna veličina →</a>
+    </section>
+    <section class="card">
+      <h2 data-sr="Najveći izmereni intenzitet" data-en="Maximum measured intensity">Najveći izmereni intenzitet</h2>
+      <p data-sr="Najveća gustina snage zračenja po lokaciji, kroz sve prolaze (MW/km²)." data-en="Highest radiative power density per location across all overpasses (MW/km²).">Najveća gustina snage zračenja po lokaciji, kroz sve prolaze (MW/km²).</p>
+      <div class="media"><img src="deliblato2026_frp_max.png" loading="lazy" alt="Najveći izmereni intenzitet"></div>
+      <a class="open" href="deliblato2026_frp_max.png" target="_blank" rel="noopener" data-sr="Puna veličina →" data-en="Full size →">Puna veličina →</a>
+    </section>
+
+<footer>
+  <h3 data-sr="Izvori podataka i atribucija" data-en="Data sources and attribution">Izvori podataka i atribucija</h3>
+  <ul>
+    <li data-sr="Copernicus Sentinel-2 i Sentinel-3 podaci (2026), obrađeni od strane autora. Sadrži izmenjene Copernicus Sentinel podatke."
+        data-en="Copernicus Sentinel-2 and Sentinel-3 data (2026), processed by the authors. Contains modified Copernicus Sentinel data.">Copernicus Sentinel-2 i Sentinel-3 podaci (2026), obrađeni od strane autora. Sadrži izmenjene Copernicus Sentinel podatke.</li>
+    <li data-sr="Termalne anomalije: NASA FIRMS (MODIS i VIIRS). NASA Firms podaci su u javnom domenu; zahvalnost NASA-i / LANCE FIRMS."
+        data-en="Thermal anomalies: NASA FIRMS (MODIS and VIIRS). We acknowledge the use of data from NASA's Fire Information for Resource Management System (FIRMS), part of NASA's Earth Science Data and Information System (ESDIS).">Termalne anomalije: NASA FIRMS (MODIS i VIIRS). Zahvalnost NASA-i / LANCE FIRMS.</li>
+    <li data-sr="Finalni perimetar izveden iz Copernicus Emergency Management Service — Rapid Mapping delineacije (EMSR914). © European Union, Copernicus Emergency Management Service. Ovde su prikazani samo izvedeni vektorski slojevi; podloga sa snimka vrlo visoke rezolucije nije objavljena."
+        data-en="Final perimeter derived from the Copernicus Emergency Management Service — Rapid Mapping delineation (EMSR914). © European Union, Copernicus Emergency Management Service. Only derived vector layers are shown here; the very-high-resolution image background is not republished.">Finalni perimetar izveden iz Copernicus Emergency Management Service — Rapid Mapping delineacije (EMSR914). © European Union, Copernicus Emergency Management Service. Ovde su prikazani samo izvedeni vektorski slojevi; podloga sa snimka vrlo visoke rezolucije nije objavljena.</li>
+    <li data-sr="Nadmorska visina: Copernicus DEM GLO-30. © DLR e.V. (2014–2018) i © Airbus Defence and Space GmbH (2019), pod licencom Evropske komisije."
+        data-en="Elevation: Copernicus DEM GLO-30. © DLR e.V. (2014–2018) and © Airbus Defence and Space GmbH (2019), provided under COPERNICUS by the European Union.">Nadmorska visina: Copernicus DEM GLO-30. © DLR e.V. (2014–2018) i © Airbus Defence and Space GmbH (2019).</li>
+  </ul>
+
+  <h3 data-sr="Metoda" data-en="Method">Metoda</h3>
+  <p data-sr="Rekonstrukcija je rađena po NERO metodologiji (Benali &amp; Campos, COST Action CA22164): vreme dolaska vatre interpolira se iz termalnih detekcija, a ograničava datiranim perimetrima iz optičkih snimaka i ručne delineacije. Brzina širenja meri se kao terensko rastojanje između uzastopnih izohrona."
+     data-en="The reconstruction follows the NERO methodology (Benali &amp; Campos, COST Action CA22164): time of arrival is interpolated from thermal detections and constrained by dated perimeters from optical imagery and manual delineation. Rate of spread is measured as terrain distance between consecutive isochrones.">Rekonstrukcija je rađena po NERO metodologiji (Benali &amp; Campos, COST Action CA22164): vreme dolaska vatre interpolira se iz termalnih detekcija, a ograničava datiranim perimetrima iz optičkih snimaka i ručne delineacije. Brzina širenja meri se kao terensko rastojanje između uzastopnih izohrona.</p>
+</footer>
+</div>
+
+<script>
+// Prebacivanje jezika: svaki element sa data-sr/data-en menja tekst.
+// Bez biblioteke i bez drugog fajla — stranica mora da radi i sa fajl sistema.
+const nodes = [...document.querySelectorAll("[data-sr]")];
+function setLang(l) {
+  nodes.forEach(n => { const t = n.getAttribute("data-" + l); if (t) n.textContent = t; });
+  document.documentElement.lang = l;
+  document.getElementById("b-sr").setAttribute("aria-pressed", l === "sr");
+  document.getElementById("b-en").setAttribute("aria-pressed", l === "en");
+}
+document.getElementById("b-sr").onclick = () => setLang("sr");
+document.getElementById("b-en").onclick = () => setLang("en");
+if ((navigator.language || "").slice(0, 2) !== "sr") setLang("en");
+</script>
+</body></html>

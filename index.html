@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="sr"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wildfires Serbia — rekonstrukcije širenja požara</title>
+<meta name="description" id="meta-desc"
+  content="Rekonstrukcije širenja šumskih požara u Srbiji iz satelitskih podataka: vreme dolaska vatre, brzina širenja, snaga zračenja i oslobođena energija."
+  data-sr="Rekonstrukcije širenja šumskih požara u Srbiji iz satelitskih podataka: vreme dolaska vatre, brzina širenja, snaga zračenja i oslobođena energija."
+  data-en="Satellite-based reconstructions of wildfire spread in Serbia: fire arrival time, rate of spread, fire radiative power and released energy.">
+<style>
+:root { color-scheme: light dark;
+  --surface-1:#fcfcfb; --surface-2:#f2f1ee; --text-1:#0b0b0b;
+  --text-2:#52514e; --muted:#8a8880; --grid:#e6e5e1; --orange:#c24d1f; }
+@media (prefers-color-scheme: dark) { :root {
+  --surface-1:#121211; --surface-2:#1b1b19; --text-1:#f2f1ee;
+  --text-2:#c9c7c1; --muted:#8a8880; --grid:#2a2a27; } }
+* { box-sizing:border-box; }
+body { margin:0; background:var(--surface-1); color:var(--text-1);
+  font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; }
+.wrap { max-width:820px; margin:0 auto; padding:44px 22px 64px; }
+header { display:flex; justify-content:space-between; align-items:flex-start;
+  gap:18px; flex-wrap:wrap; margin-bottom:26px; }
+h1 { margin:0 0 6px; font-size:27px; letter-spacing:-0.01em; }
+.sub { color:var(--text-2); margin:0; font-size:15px; }
+.lang { display:flex; flex:0 0 auto; }
+.lang button { font:inherit; font-size:13px; font-weight:600; padding:5px 11px;
+  border:1px solid var(--grid); background:var(--surface-2);
+  color:var(--text-2); cursor:pointer; }
+.lang button:first-child { border-radius:7px 0 0 7px; }
+.lang button:last-child { border-radius:0 7px 7px 0; border-left:none; }
+.lang button[aria-pressed="true"] { background:var(--text-1);
+  color:var(--surface-1); border-color:var(--text-1); }
+.card { display:block; text-decoration:none; color:inherit;
+  background:var(--surface-2); border:1px solid var(--grid);
+  border-radius:12px; padding:18px 20px; margin:0 0 14px;
+  transition:border-color .15s; }
+.card:hover { border-color:var(--orange); }
+.card h2 { margin:0 0 4px; font-size:19px; }
+.card .meta { color:var(--muted); font-size:13px; margin:0 0 8px; }
+.card p { margin:0; color:var(--text-2); font-size:14.5px; }
+.card .go { display:inline-block; margin-top:10px; font-size:14px;
+  font-weight:600; color:var(--orange); }
+h3 { font-size:15px; margin:30px 0 8px; }
+footer { margin-top:34px; padding-top:18px; border-top:1px solid var(--grid);
+  color:var(--text-2); font-size:13.5px; }
+footer a { color:inherit; }
+footer ul { padding-left:18px; margin:6px 0; }
+</style></head><body><div class="wrap">
+
+<header>
+  <div>
+    <h1>Wildfires Serbia</h1>
+    <p class="sub" data-sr="Rekonstrukcije širenja šumskih požara iz satelitskih podataka"
+       data-en="Satellite-based reconstructions of wildfire spread">Rekonstrukcije širenja šumskih požara iz satelitskih podataka</p>
+  </div>
+  <div class="lang">
+    <button id="b-sr" aria-pressed="true">SR</button><button id="b-en" aria-pressed="false">EN</button>
+  </div>
+</header>
+
+<a class="card" href="deliblato2026/">
+  <h2 data-sr="Deliblatska peščara 2026" data-en="Deliblato Sands 2026">Deliblatska peščara 2026</h2>
+  <p class="meta" data-sr="5. – 28. avgust 2026. · 12.344 ha · 594,8 TJ"
+     data-en="5–28 August 2026 · 12,344 ha · 594.8 TJ">5. – 28. avgust 2026. · 12.344 ha · 594,8 TJ</p>
+  <p data-sr="Izohrone širenja, brzina čela požara, snaga zračenja po satelitskim prolazima i ukupna oslobođena energija. Interaktivne stranice, animacije i grafikoni."
+     data-en="Spread isochrones, head rate of spread, radiative power by satellite overpass and total released energy. Interactive pages, animations and figures.">Izohrone širenja, brzina čela požara, snaga zračenja po satelitskim prolazima i ukupna oslobođena energija. Interaktivne stranice, animacije i grafikoni.</p>
+  <span class="go" data-sr="Otvori →" data-en="Open →">Otvori →</span>
+</a>
+
+<footer>
+  <h3 data-sr="Metoda" data-en="Method">Metoda</h3>
+  <p data-sr="Rekonstrukcije su rađene po metodologiji koju su Akli Benali (University of Lisbon) i Marcos Campos (Força Especial de Proteção Civil) predstavili na NERO Café webinaru „Practical tools to reconstruct wildfire spread“ (maj 2024, COST Action CA22164 — NERO), i po objavljenim radovima iste grupe, pre svega bazi PT-FireSprd (Benali i sar., 2023)."
+     data-en="The reconstructions follow the methodology presented by Akli Benali (University of Lisbon) and Marcos Campos (Força Especial de Proteção Civil) at the NERO Café webinar “Practical tools to reconstruct wildfire spread” (May 2024, COST Action CA22164 — NERO), and the published work of the same group, above all the PT-FireSprd database (Benali et al., 2023).">Rekonstrukcije su rađene po metodologiji koju su Akli Benali (University of Lisbon) i Marcos Campos (Força Especial de Proteção Civil) predstavili na NERO Café webinaru „Practical tools to reconstruct wildfire spread“ (maj 2024, COST Action CA22164 — NERO), i po objavljenim radovima iste grupe, pre svega bazi PT-FireSprd (Benali i sar., 2023).</p>
+  <ul>
+    <li>Benali, A. &amp; Campos, M. (2024). <em>Practical tools to reconstruct wildfire spread.</em> NERO Café webinar, COST Action CA22164 — NERO. <a href="https://nero-network.eu" target="_blank" rel="noopener">nero-network.eu</a></li>
+    <li>Benali, A., Guiomar, N., Gonçalves, H., Mota, B., Silva, F., Fernandes, P. M., Mota, C., Penha, A., Santos, J., Pereira, J. M. C. &amp; Sá, A. C. L. (2023). The Portuguese Large Wildfire Spread database (PT-FireSprd). <em>Earth System Science Data</em>, 15, 3791–3818. <a href="https://doi.org/10.5194/essd-15-3791-2023" target="_blank" rel="noopener">doi:10.5194/essd-15-3791-2023</a></li>
+  </ul>
+  <p data-sr="Autor: Slobodan Milanović, Univerzitet u Beogradu — Šumarski fakultet (ORCID 0000-0002-8260-999X). Sadržaj je pod licencom CC BY 4.0; izvori podataka (Copernicus Sentinel, Copernicus EMS, Copernicus DEM, NASA FIRMS, ERA5) imaju svoje uslove i navedeni su u LICENSE i na stranicama."
+     data-en="Author: Slobodan Milanović, University of Belgrade – Faculty of Forestry (ORCID 0000-0002-8260-999X). Content licensed CC BY 4.0; data sources (Copernicus Sentinel, Copernicus EMS, Copernicus DEM, NASA FIRMS, ERA5) keep their own terms and are listed in LICENSE and on the pages.">Autor: Slobodan Milanović, Univerzitet u Beogradu — Šumarski fakultet (ORCID 0000-0002-8260-999X). Sadržaj je pod licencom CC BY 4.0; izvori podataka (Copernicus Sentinel, Copernicus EMS, Copernicus DEM, NASA FIRMS, ERA5) imaju svoje uslove i navedeni su u LICENSE i na stranicama.</p>
+</footer>
+</div>
+
+<script>
+// Isti mehanizam kao na stranicama požara: svaki element sa data-sr/data-en
+// menja tekst, bez biblioteke i bez drugog fajla.
+const nodes = [...document.querySelectorAll("[data-sr]:not(meta)")];
+const meta = document.getElementById("meta-desc");
+function setLang(l) {
+  nodes.forEach(n => { const t = n.getAttribute("data-" + l); if (t) n.textContent = t; });
+  if (meta) meta.setAttribute("content", meta.getAttribute("data-" + l));
+  document.documentElement.lang = l;
+  document.title = (l === "en" ? "Wildfires Serbia — wildfire spread reconstructions"
+                               : "Wildfires Serbia — rekonstrukcije širenja požara");
+  document.getElementById("b-sr").setAttribute("aria-pressed", l === "sr");
+  document.getElementById("b-en").setAttribute("aria-pressed", l === "en");
+}
+document.getElementById("b-sr").onclick = () => setLang("sr");
+document.getElementById("b-en").onclick = () => setLang("en");
+if ((navigator.language || "").slice(0, 2) !== "sr") setLang("en");
+</script>
+</body></html>

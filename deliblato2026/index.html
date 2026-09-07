@@ -2,7 +2,9 @@
 <html lang="sr"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Deliblatska peščara 2026 — rekonstrukcija širenja požara, 5. – 28. 8. 2026.</title>
-<meta name="description" content="Rekonstrukcija širenja požara iz satelitskih podataka za period 5. – 28. 8. 2026.: izohrone, brzina širenja, snaga zračenja i oslobođena energija.">
+<meta name="description" id="meta-desc" content="Rekonstrukcija širenja požara iz satelitskih podataka za period 5. – 28. 8. 2026.: izohrone, brzina širenja, snaga zračenja i oslobođena energija."
+  data-sr="Rekonstrukcija širenja požara iz satelitskih podataka za period 5. – 28. 8. 2026.: izohrone, brzina širenja, snaga zračenja i oslobođena energija."
+  data-en="Satellite-based reconstruction of wildfire spread for 5–28 August 2026: isochrones, rate of spread, fire radiative power and released energy.">
 <style>
 :root { color-scheme: light dark;
   --surface-1:#fcfcfb; --surface-2:#f2f1ee; --text-1:#0b0b0b;
@@ -63,7 +65,7 @@ footer a { color:var(--text-2); }
 
 <header>
   <div>
-    <h1>Deliblatska peščara 2026</h1>
+    <h1 data-sr="Deliblatska peščara 2026" data-en="Deliblato Sands 2026">Deliblatska peščara 2026</h1>
     <p class="sub" data-sr="Rekonstrukcija širenja požara iz satelitskih podataka"
        data-en="Satellite-based reconstruction of fire spread">Rekonstrukcija širenja požara iz satelitskih podataka</p>
     <p class="period"><span data-sr="Analizirani period: 5. – 28. 8. 2026."
@@ -76,48 +78,54 @@ footer a { color:var(--text-2); }
 </header>
 
 <div class="tiles">
-      <div class="tile"><div class="v">12 344<span class="u" data-sr=" ha" data-en=" ha"> ha</span></div><div class="k" data-sr="Opožarena površina" data-en="Burned area">Opožarena površina</div></div>
-      <div class="tile"><div class="v">21,8<span class="u" data-sr=" dana" data-en=" days"> dana</span></div><div class="k" data-sr="Trajanje širenja" data-en="Spread duration">Trajanje širenja</div></div>
-      <div class="tile"><div class="v">562<span class="u" data-sr=" m/h" data-en=" m/h"> m/h</span></div><div class="k" data-sr="Najveća brzina čela" data-en="Peak head ROS">Najveća brzina čela</div></div>
-      <div class="tile"><div class="v">594,8<span class="u" data-sr=" TJ" data-en=" TJ"> TJ</span></div><div class="k" data-sr="Oslobođena energija" data-en="Released energy">Oslobođena energija</div></div>
-      <div class="tile"><div class="v">2 488<span class="u" data-sr=" " data-en=" "> </span></div><div class="k" data-sr="Termalnih detekcija" data-en="Thermal detections">Termalnih detekcija</div></div>
-      <div class="tile"><div class="v">218 880<span class="u" data-sr=" t" data-en=" t"> t</span></div><div class="k" data-sr="Procena sagorele biomase" data-en="Estimated biomass burned">Procena sagorele biomase</div></div>
+      <div class="tile"><div class="v"><span data-sr="12 344" data-en="12,344">12 344</span><span class="u" data-sr=" ha" data-en=" ha"> ha</span></div><div class="k" data-sr="Opožarena površina" data-en="Burned area">Opožarena površina</div></div>
+      <div class="tile"><div class="v"><span data-sr="21,8" data-en="21.8">21,8</span><span class="u" data-sr=" dana" data-en=" days"> dana</span></div><div class="k" data-sr="Trajanje širenja" data-en="Spread duration">Trajanje širenja</div></div>
+      <div class="tile"><div class="v"><span data-sr="562" data-en="562">562</span><span class="u" data-sr=" m/h" data-en=" m/h"> m/h</span></div><div class="k" data-sr="Najveća brzina čela" data-en="Peak head ROS">Najveća brzina čela</div></div>
+      <div class="tile"><div class="v"><span data-sr="594,8" data-en="594.8">594,8</span><span class="u" data-sr=" TJ" data-en=" TJ"> TJ</span></div><div class="k" data-sr="Oslobođena energija" data-en="Released energy">Oslobođena energija</div></div>
+      <div class="tile"><div class="v"><span data-sr="2 488" data-en="2,488">2 488</span><span class="u" data-sr=" " data-en=" "> </span></div><div class="k" data-sr="Termalnih detekcija" data-en="Thermal detections">Termalnih detekcija</div></div>
+      <div class="tile"><div class="v"><span data-sr="218 880" data-en="218,880">218 880</span><span class="u" data-sr=" t" data-en=" t"> t</span></div><div class="k" data-sr="Procena sagorele biomase" data-en="Estimated biomass burned">Procena sagorele biomase</div></div>
 </div>
 
 <p class="note" data-sr="Rekonstrukcija obuhvata isključivo period 5. – 28. 8. 2026. — od prve termalne detekcije do kraja analiziranog prozora. Kasnije reaktivacije istog požarišta nisu uključene ni u perimetar, ni u izohrone, ni u oslobođenu energiju."
    data-en="The reconstruction covers only 5–28 August 2026 — from the first thermal detection to the end of the analysed window. Later reactivations of the same burn area are not included in the perimeter, the isochrones or the released energy.">Rekonstrukcija obuhvata isključivo period 5. – 28. 8. 2026. — od prve termalne detekcije do kraja analiziranog prozora. Kasnije reaktivacije istog požarišta nisu uključene ni u perimetar, ni u izohrone, ni u oslobođenu energiju.</p>
 
-<p class="note" data-sr="Ukupna oslobođena energija je vremenski integral snage do poslednjeg validnog perimetra (t = 551 h. Sentinel-2). Satelit područje vidi samo pri prolazu. pa je 9 % integrala interpolirano preko praznina dužih od 8 h — vrednost je donja granica. ne zatvoren energetski bilans." data-en="Total released energy is the time integral of power up to the last valid perimeter (t = 551 h, Sentinel-2). Polar-orbiting satellites see the area only at overpass, so 9 % of the integral is interpolated across gaps longer than 8 h — the value is a lower bound, not a closed energy budget.">Ukupna oslobođena energija je vremenski integral snage do poslednjeg validnog perimetra (t = 551 h. Sentinel-2). Satelit područje vidi samo pri prolazu. pa je 9 % integrala interpolirano preko praznina dužih od 8 h — vrednost je donja granica. ne zatvoren energetski bilans.</p>
+<p class="note" data-sr="Ukupna oslobođena energija je vremenski integral snage do poslednjeg validnog perimetra (t = 551 h, Sentinel-2). Satelit područje vidi samo pri prolazu, pa je 9 % integrala interpolirano preko praznina dužih od 8 h — vrednost je donja granica, ne zatvoren energetski bilans." data-en="Total released energy is the time integral of power up to the last valid perimeter (t = 551 h, Sentinel-2). Polar-orbiting satellites see the area only at overpass, so 9 % of the integral is interpolated across gaps longer than 8 h — the value is a lower bound, not a closed energy budget.">Ukupna oslobođena energija je vremenski integral snage do poslednjeg validnog perimetra (t = 551 h, Sentinel-2). Satelit područje vidi samo pri prolazu, pa je 9 % integrala interpolirano preko praznina dužih od 8 h — vrednost je donja granica, ne zatvoren energetski bilans.</p>
 
     <section class="card">
       <h2 data-sr="FRP kroz vreme i prostor" data-en="Fire radiative power in time and space">FRP kroz vreme i prostor</h2>
       <p data-sr="Interaktivna mapa: klizač po satelitskim prolazima, snaga zračenja po detekciji, ukupna oslobođena energija i mapa najvećeg izmerenog intenziteta." data-en="Interactive map: slider over satellite overpasses, radiative power per detection, total released energy and a map of maximum measured intensity.">Interaktivna mapa: klizač po satelitskim prolazima, snaga zračenja po detekciji, ukupna oslobođena energija i mapa najvećeg izmerenog intenziteta.</p>
-      <div class="media"><iframe src="deliblato2026_frp.html" loading="lazy" title="FRP kroz vreme i prostor"></iframe></div>
-      <a class="open" href="deliblato2026_frp.html" target="_blank" rel="noopener" data-sr="Otvori →" data-en="Open →">Otvori →</a>
+      <div class="media"><iframe src="deliblato2026_frp.html" data-href-sr="deliblato2026_frp.html" data-href-en="deliblato2026_frp_en.html" loading="lazy" title="FRP kroz vreme i prostor"></iframe></div>
+      <a class="open" href="deliblato2026_frp.html" data-href-sr="deliblato2026_frp.html" data-href-en="deliblato2026_frp_en.html" target="_blank" rel="noopener" data-sr="Otvori →" data-en="Open →">Otvori →</a>
     </section>
     <section class="card">
       <h2 data-sr="Ponašanje požara — kontrolna tabla" data-en="Fire behaviour dashboard">Ponašanje požara — kontrolna tabla</h2>
       <p data-sr="Brzina širenja i prirast površine kroz vreme, sa osenčenim noćnim periodima." data-en="Rate of spread and area growth over time, with night periods shaded.">Brzina širenja i prirast površine kroz vreme, sa osenčenim noćnim periodima.</p>
-      <div class="media"><iframe src="deliblato2026_dashboard.html" loading="lazy" title="Ponašanje požara — kontrolna tabla"></iframe></div>
-      <a class="open" href="deliblato2026_dashboard.html" target="_blank" rel="noopener" data-sr="Otvori →" data-en="Open →">Otvori →</a>
+      <div class="media"><iframe src="deliblato2026_dashboard.html" data-href-sr="deliblato2026_dashboard.html" data-href-en="deliblato2026_dashboard_en.html" loading="lazy" title="Ponašanje požara — kontrolna tabla"></iframe></div>
+      <a class="open" href="deliblato2026_dashboard.html" data-href-sr="deliblato2026_dashboard.html" data-href-en="deliblato2026_dashboard_en.html" target="_blank" rel="noopener" data-sr="Otvori →" data-en="Open →">Otvori →</a>
     </section>
     <section class="card">
       <h2 data-sr="Animacija širenja" data-en="Spread animation">Animacija širenja</h2>
       <p data-sr="Rekonstruisano širenje požara po izohronama, na Sentinel-2 podlozi." data-en="Reconstructed fire spread by isochrones, over a Sentinel-2 basemap.">Rekonstruisano širenje požara po izohronama, na Sentinel-2 podlozi.</p>
-      <div class="media"><video src="deliblato2026_animacija.mp4" controls loop muted playsinline></video></div>
-      <a class="open" href="deliblato2026_animacija.mp4" download data-sr="Preuzmi MP4 ↓" data-en="Download MP4 ↓">Preuzmi MP4 ↓</a>
+      <div class="media"><video src="deliblato2026_animacija.mp4" data-href-sr="deliblato2026_animacija.mp4" data-href-en="deliblato2026_animation_en.mp4" controls loop muted playsinline></video></div>
+      <a class="open" href="deliblato2026_animacija.mp4" data-href-sr="deliblato2026_animacija.mp4" data-href-en="deliblato2026_animation_en.mp4" download data-sr="Preuzmi MP4 ↓" data-en="Download MP4 ↓">Preuzmi MP4 ↓</a>
+    </section>
+    <section class="card">
+      <h2 data-sr="Animacija FRP-a" data-en="FRP animation">Animacija FRP-a</h2>
+      <p data-sr="Snaga zračenja po satelitskim prolazima, sa panelom merenja i kumulativnom energijom." data-en="Fire radiative power by satellite overpass, with a measurement panel and cumulative energy.">Snaga zračenja po satelitskim prolazima, sa panelom merenja i kumulativnom energijom.</p>
+      <div class="media"><video src="deliblato2026_frp_animacija.mp4" data-href-sr="deliblato2026_frp_animacija.mp4" data-href-en="deliblato2026_frp_animation_en.mp4" controls loop muted playsinline></video></div>
+      <a class="open" href="deliblato2026_frp_animacija.mp4" data-href-sr="deliblato2026_frp_animacija.mp4" data-href-en="deliblato2026_frp_animation_en.mp4" download data-sr="Preuzmi MP4 ↓" data-en="Download MP4 ↓">Preuzmi MP4 ↓</a>
     </section>
     <section class="card">
       <h2 data-sr="Brzina širenja i rast površine" data-en="Rate of spread and area growth">Brzina širenja i rast površine</h2>
       <p data-sr="Dva grafikona sa zajedničkom vremenskom osom." data-en="Two panels sharing a common time axis.">Dva grafikona sa zajedničkom vremenskom osom.</p>
-      <div class="media"><img src="deliblato2026_fire_behavior.png" loading="lazy" alt="Brzina širenja i rast površine"></div>
-      <a class="open" href="deliblato2026_fire_behavior.png" target="_blank" rel="noopener" data-sr="Puna veličina →" data-en="Full size →">Puna veličina →</a>
+      <div class="media"><img src="deliblato2026_fire_behavior.png" data-href-sr="deliblato2026_fire_behavior.png" data-href-en="deliblato2026_fire_behavior_en.png" loading="lazy" alt="Brzina širenja i rast površine"></div>
+      <a class="open" href="deliblato2026_fire_behavior.png" data-href-sr="deliblato2026_fire_behavior.png" data-href-en="deliblato2026_fire_behavior_en.png" target="_blank" rel="noopener" data-sr="Puna veličina →" data-en="Full size →">Puna veličina →</a>
     </section>
     <section class="card">
       <h2 data-sr="Najveći izmereni intenzitet" data-en="Maximum measured intensity">Najveći izmereni intenzitet</h2>
       <p data-sr="Najveća gustina snage zračenja po lokaciji, kroz sve prolaze (MW/km²)." data-en="Highest radiative power density per location across all overpasses (MW/km²).">Najveća gustina snage zračenja po lokaciji, kroz sve prolaze (MW/km²).</p>
-      <div class="media"><img src="deliblato2026_frp_max.png" loading="lazy" alt="Najveći izmereni intenzitet"></div>
-      <a class="open" href="deliblato2026_frp_max.png" target="_blank" rel="noopener" data-sr="Puna veličina →" data-en="Full size →">Puna veličina →</a>
+      <div class="media"><img src="deliblato2026_frp_max.png" data-href-sr="deliblato2026_frp_max.png" data-href-en="deliblato2026_frp_max.png" loading="lazy" alt="Najveći izmereni intenzitet"></div>
+      <a class="open" href="deliblato2026_frp_max.png" data-href-sr="deliblato2026_frp_max.png" data-href-en="deliblato2026_frp_max.png" target="_blank" rel="noopener" data-sr="Puna veličina →" data-en="Full size →">Puna veličina →</a>
     </section>
 
 <footer>
@@ -146,10 +154,21 @@ footer a { color:var(--text-2); }
 <script>
 // Prebacivanje jezika: svaki element sa data-sr/data-en menja tekst.
 // Bez biblioteke i bez drugog fajla — stranica mora da radi i sa fajl sistema.
-const nodes = [...document.querySelectorAll("[data-sr]")];
+const nodes = [...document.querySelectorAll("[data-sr]:not(meta)")];
+const meta = document.getElementById("meta-desc");
+const links = [...document.querySelectorAll("[data-href-sr]")];
 function setLang(l) {
   nodes.forEach(n => { const t = n.getAttribute("data-" + l); if (t) n.textContent = t; });
+  // Linkovi i mediji: engleske podstranice, animacija i grafikoni (_en).
+  links.forEach(n => {
+    const f = n.getAttribute("data-href-" + l); if (!f) return;
+    const attr = n.tagName === "A" ? "href" : "src";
+    if (n.getAttribute(attr) !== f) n.setAttribute(attr, f);
+  });
+  if (meta) meta.setAttribute("content", meta.getAttribute("data-" + l));
   document.documentElement.lang = l;
+  document.title = (l === "en" ? "Deliblato Sands 2026 — wildfire spread reconstruction, 5–28 August 2026"
+                              : "Deliblatska peščara 2026 — rekonstrukcija širenja požara, 5. – 28. 8. 2026.");
   document.getElementById("b-sr").setAttribute("aria-pressed", l === "sr");
   document.getElementById("b-en").setAttribute("aria-pressed", l === "en");
 }

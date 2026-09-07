@@ -1,11 +1,11 @@
 cff-version: 1.2.0
-message: "Ako koristite ove rezultate, citirajte ovako."
-title: "Deliblatska peščara 2026 — rekonstrukcija širenja požara iz satelitskih podataka, 5. – 28. 8. 2026"
+message: "If you use these results, please cite them as below. / Ako koristite ove rezultate, citirajte ovako."
+title: "Deliblato Sands 2026 — satellite-based wildfire spread reconstruction, 5–28 August 2026"
 abstract: >-
-  Rekonstrukcija vremena dolaska vatre, brzine širenja, snage zračenja i
-  ukupne oslobođene energije za požar Deliblatska peščara 2026, analizirani period
-  2026-08-05 10:51 – 2026-08-28 23:59 UTC (5–28 August 2026), po NERO metodologiji. Kasnije
-  reaktivacije istog požarišta nisu obuhvaćene.
+  Reconstruction of fire arrival time, rate of spread, fire radiative power
+  and total released energy for the Deliblato Sands 2026 wildfire (Deliblatska peščara 2026), period
+  analysed 2026-08-05 10:51 – 2026-08-28 23:59 UTC (5–28 August 2026), following the NERO methodology.
+  Later reactivations of the same burn area are not included.
 authors:
   - family-names: "Milanović"
     given-names: "Slobodan"
@@ -34,7 +34,7 @@ references:
     conference:
       name: "NERO Café webinar, COST Action CA22164 — NERO, European Network on Extreme Fire Behavior"
     url: "https://nero-network.eu"
-    notes: "Metodologija na osnovu koje je aplikacija za rekonstrukciju razvijena."
+    notes: "Methodology on which the reconstruction application was developed."
   - type: article
     title: "The Portuguese Large Wildfire Spread database (PT-FireSprd)"
     authors:

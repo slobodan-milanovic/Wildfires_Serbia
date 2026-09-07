@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="sr"><head><meta charset="utf-8">
+<html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Deliblatska peščara 2026 — ponašanje požara, 5. – 28. 8. 2026.</title>
+<title>Deliblato Sands 2026 — fire behaviour, 5–28 August 2026</title>
 <style>
   .viz-root {
     color-scheme: light;
@@ -67,32 +67,32 @@
     border:1px solid var(--axis); border-radius:6px; padding:5px 11px;
     font:inherit; font-size:12px; cursor:pointer; float:right; }
 </style></head>
-<body><a href="deliblato2026_dashboard_en.html" style="position:fixed;left:12px;bottom:12px;z-index:99;font:600 12px/1 system-ui,sans-serif;padding:6px 10px;border-radius:7px;background:rgba(127,127,127,.18);color:inherit;text-decoration:none;letter-spacing:.02em" title="EN">SR · <u>EN</u></a><div class="viz-root">
-  <button id="themeBtn">Tema</button>
-  <h1>Deliblatska peščara 2026</h1>
-  <p class="sub"><strong>Analizirani period: 5. – 28. 8. 2026.</strong> · Rekonstrukcija širenja iz Sentinel-2/3 snimaka i MODIS/VIIRS termalnih anomalija · vremena u zoni Europe/Belgrade</p>
+<body><a href="deliblato2026_dashboard.html" style="position:fixed;left:12px;bottom:12px;z-index:99;font:600 12px/1 system-ui,sans-serif;padding:6px 10px;border-radius:7px;background:rgba(127,127,127,.18);color:inherit;text-decoration:none;letter-spacing:.02em" title="SR">EN · <u>SR</u></a><div class="viz-root">
+  <button id="themeBtn">Theme</button>
+  <h1>Deliblato Sands 2026</h1>
+  <p class="sub"><strong>Period analysed: 5–28 August 2026</strong> · Spread reconstruction from Sentinel-2/3 imagery and MODIS/VIIRS thermal anomalies · times in zone  Europe/Belgrade</p>
 
   <div class="tiles">
-    <div class="tile"><div class="k">Ukupna površina</div>
-      <div class="v">12.344 <span class="u">ha</span></div>
-      <div class="n">190 izohrona · iz rastera na 20 m: 12.855 ha</div></div>
-    <div class="tile"><div class="k">Trajanje</div>
+    <div class="tile"><div class="k">Total area</div>
+      <div class="v">12,344 <span class="u">ha</span></div>
+      <div class="n">190 isochrones · from the 20 m raster: 12,855 ha</div></div>
+    <div class="tile"><div class="k">Duration</div>
       <div class="v">565 <span class="u">h</span></div>
-      <div class="n">od početka do poslednjeg snimka</div></div>
-    <div class="tile"><div class="k">Najveća brzina širenja</div>
+      <div class="n">from ignition to the last observation</div></div>
+    <div class="tile"><div class="k">Peak rate of spread</div>
       <div class="v">562 <span class="u">m/h</span></div>
       <div class="n">2026-08-11 15:44</div></div>
-    <div class="tile"><div class="k">Najveći prirast površine</div>
+    <div class="tile"><div class="k">Peak area growth</div>
       <div class="v">216 <span class="u">ha/h</span></div>
       <div class="n">2026-08-25 11:31</div></div>
   </div>
 
-  <div class="chart"><h2>Brzina širenja (čelo požara)</h2>
-    <p class="cs">m/h · osenčeno = noć</p><svg id="c1" viewBox="0 0 900 240"></svg></div>
-  <div class="chart"><h2>Brzina prirasta površine</h2>
-    <p class="cs">ha/h · osenčeno = noć</p><svg id="c2" viewBox="0 0 900 240"></svg></div>
+  <div class="chart"><h2>Rate of spread (fire head)</h2>
+    <p class="cs">m/h · shaded = night</p><svg id="c1" viewBox="0 0 900 240"></svg></div>
+  <div class="chart"><h2>Area growth rate</h2>
+    <p class="cs">ha/h · shaded = night</p><svg id="c2" viewBox="0 0 900 240"></svg></div>
 
-  <details><summary>Prikaži tabelu</summary><div id="tbl"></div></details>
+  <details><summary>Show table</summary><div id="tbl"></div></details>
   <div id="tip"></div>
 </div>
 <script>
@@ -103,7 +103,7 @@ const NIGHT = [[7.25, 17.25], [31.25, 41.25], [55.25, 65.25], [79.25, 89.25], [1
 const NS = "http://www.w3.org/2000/svg";
 const el = (n, a = {}) => { const e = document.createElementNS(NS, n);
   for (const k in a) e.setAttribute(k, a[k]); return e; };
-const fmt = v => v.toLocaleString("sr-RS", {maximumFractionDigits: 0});
+const fmt = v => v.toLocaleString("en-GB", {maximumFractionDigits: 0});
 
 function draw(id, key, colorVar, unit) {
   const svg = document.getElementById(id);
@@ -187,11 +187,11 @@ const tip = document.getElementById("tip");
 function show(ev, d, color) {
   tip.innerHTML = "<b>" + d.label + "</b>" +
     '<span class="sw" style="background:' + color + '"></span>' +
-    "brzina širenja: " + fmt(d.ros) + " m/h<br>" +
+    "rate of spread: " + fmt(d.ros) + " m/h<br>" +
     '<span class="sw" style="background:transparent"></span>' +
-    "prirast: " + fmt(d.growth) + " ha/h · " + fmt(d.inc) + " ha<br>" +
+    "growth: " + fmt(d.growth) + " ha/h · " + fmt(d.inc) + " ha<br>" +
     '<span class="sw" style="background:transparent"></span>' +
-    "ukupno: " + fmt(d.cum) + " ha";
+    "total: " + fmt(d.cum) + " ha";
   tip.style.opacity = 1;
   tip.style.left = Math.min(ev.clientX + 14, innerWidth - 230) + "px";
   tip.style.top = (ev.clientY - 10) + "px";
@@ -203,9 +203,9 @@ function table() {
     "</td><td>" + fmt(d.rosMean) + "</td><td>" + d.growth.toFixed(1) +
     "</td><td>" + fmt(d.inc) + "</td><td>" + fmt(d.cum) + "</td></tr>").join("");
   document.getElementById("tbl").innerHTML =
-    "<table><thead><tr><th>Vreme</th><th>ROS max (m/h)</th>" +
-    "<th>ROS sred. (m/h)</th><th>Prirast (ha/h)</th><th>Prirast (ha)</th>" +
-    "<th>Ukupno (ha)</th></tr></thead><tbody>" + rows + "</tbody></table>";
+    "<table><thead><tr><th>Time</th><th>ROS max (m/h)</th>" +
+    "<th>ROS mean (m/h)</th><th>Growth (ha/h)</th><th>Growth (ha)</th>" +
+    "<th>Total (ha)</th></tr></thead><tbody>" + rows + "</tbody></table>";
 }
 
 function render() {

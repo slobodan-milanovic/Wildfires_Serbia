@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="sr"><head><meta charset="utf-8">
+<html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Deliblatska peščara 2026 — FRP kroz vreme, 5. – 28. 8. 2026.</title>
+<title>Deliblato Sands 2026 — fire radiative power over time, 5–28 August 2026</title>
 <style>
 :root { color-scheme: light; }
 .viz {
@@ -64,10 +64,10 @@ table { border-collapse:collapse; width:100%; font-size:12px; margin-top:14px; }
 th,td { text-align:right; padding:3px 6px; border-bottom:1px solid var(--grid); }
 th:first-child, td:first-child { text-align:left; }
 th { color:var(--muted); font-weight:600; }
-</style></head><body><a href="deliblato2026_frp_en.html" style="position:fixed;left:12px;bottom:12px;z-index:99;font:600 12px/1 system-ui,sans-serif;padding:6px 10px;border-radius:7px;background:rgba(127,127,127,.18);color:inherit;text-decoration:none;letter-spacing:.02em" title="EN">SR · <u>EN</u></a><div class="viz">
+</style></head><body><a href="deliblato2026_frp.html" style="position:fixed;left:12px;bottom:12px;z-index:99;font:600 12px/1 system-ui,sans-serif;padding:6px 10px;border-radius:7px;background:rgba(127,127,127,.18);color:inherit;text-decoration:none;letter-spacing:.02em" title="SR">EN · <u>SR</u></a><div class="viz">
 
-<h1>Deliblatska peščara 2026 — snaga zračenja požara (FRP)</h1>
-<p class="sub"><strong>Analizirani period: 5. – 28. 8. 2026.</strong> · NASA FIRMS · MODIS i VIIRS termalne anomalije · 2.488 detekcija u 176 satelitskih prolaza · vremena u zoni Europe/Belgrade</p>
+<h1>Deliblato Sands 2026 — fire radiative power (FRP)</h1>
+<p class="sub"><strong>Period analysed: 5–28 August 2026</strong> · NASA FIRMS · MODIS and VIIRS thermal anomalies · 2,488  detections in  176  satellite overpasses · times in zone  Europe/Belgrade</p>
 
 <div class="wrap">
   <div class="mapbox">
@@ -75,31 +75,27 @@ th { color:var(--muted); font-weight:600; }
     <div class="cap" id="cap">&nbsp;</div>
     <svg id="map" viewBox="0 0 720 720"></svg>
     <div class="ctl">
-      <button id="play">▶ Pusti</button>
+      <button id="play">▶ Play</button>
       <input type="range" id="slider" min="0" value="0" step="1">
     </div>
-    <p class="cap">Prikazane su samo detekcije tog prolaza. FRP je trenutna
-       snaga, ne zbir — zato slika pulsira između prolaza.</p>
+    <p class="cap">Only the detections of that overpass are shown. FRP is instantaneous power, not a sum — which is why the picture pulses between overpasses.</p>
     <svg id="chart" viewBox="0 0 720 152"></svg>
-    <p class="cap">Snaga požara po prolazu (MW), po datumu. Puna uspravna
-       linija je trenutni prolaz, isprekidana je poslednji validni perimetar —
-       do nje se sabira energija. Površina ispod ove krive JESTE ukupna
-       energija.</p>
+    <p class="cap">Fire power per overpass (MW), by date. The solid vertical line is the current overpass, the dashed one the last valid perimeter — energy is integrated up to it. The area under this curve IS the total energy.</p>
 
     <div class="fre">
-      <h2>Ukupna oslobođena energija (FRE)</h2>
+      <h2>Total released energy (FRE)</h2>
       <div class="fre-row">
-        <div><div class="k">FRE do poslednjeg perimetra</div>
+        <div><div class="k">FRE up to the last perimeter</div>
           <div class="v" id="f-tj">—<span class="u"> TJ</span></div>
           <div class="n" id="f-rng"></div></div>
-        <div><div class="k">Procena sagorele biomase</div>
+        <div><div class="k">Estimated biomass burned</div>
           <div class="v" id="f-t">—<span class="u"> t</span></div>
           <div class="n" id="f-ha"></div></div>
       </div>
       <p class="note" id="f-note"></p>
     </div>
 
-    <h2 class="sec">Najveći izmereni intenzitet po lokaciji</h2>
+    <h2 class="sec">Maximum measured intensity per location</h2>
     <p class="cap" id="d-sub">&nbsp;</p>
     <svg id="dmap" viewBox="0 0 720 720"></svg>
     <svg id="dbar" viewBox="0 0 720 46"></svg>
@@ -108,21 +104,21 @@ th { color:var(--muted); font-weight:600; }
 
   <div class="side">
     <div class="tiles">
-      <div class="tile"><div class="k">Detekcija</div>
+      <div class="tile"><div class="k">Detections</div>
         <div class="v" id="t-n">—</div></div>
-      <div class="tile"><div class="k">Snaga požara</div>
+      <div class="tile"><div class="k">Fire power</div>
         <div class="v" id="t-sum">—<span class="u"> MW</span></div></div>
-      <div class="tile"><div class="k">Najjača</div>
+      <div class="tile"><div class="k">Strongest</div>
         <div class="v" id="t-max">—<span class="u"> MW</span></div></div>
-      <div class="tile"><div class="k">Sati od početka</div>
+      <div class="tile"><div class="k">Hours since ignition</div>
         <div class="v" id="t-h">—</div></div>
     </div>
     <div class="legend">
-      <h2>FRP po detekciji</h2>
-      <p>megavati, <b>logaritamska</b> skala</p>
+      <h2>FRP per detection</h2>
+      <p>megawatts, <b>logarithmic</b> scale</p>
       <svg id="cbar" viewBox="0 0 186 210"></svg>
     </div>
-    <table id="top"><thead><tr><th>Najjači prolazi</th><th>MW</th></tr></thead>
+    <table id="top"><thead><tr><th>Strongest overpasses</th><th>MW</th></tr></thead>
       <tbody></tbody></table>
   </div>
 </div>
@@ -132,7 +128,7 @@ const D = {"frames": [{"t": 0.62, "lbl": "05.08.2026 13:28", "utc": "11:28", "n"
 const SVG = "http://www.w3.org/2000/svg";
 const el = (n, a) => { const e = document.createElementNS(SVG, n);
   for (const k in a) e.setAttribute(k, a[k]); return e; };
-const fmt = v => v.toLocaleString("sr-RS", {maximumFractionDigits: 0});
+const fmt = v => v.toLocaleString("en-GB", {maximumFractionDigits: 0});
 
 // Boja po FRP-u. Log skala: FRP ima dug rep, pa bi linearna sve sabila
 // u najsvetliji korak.
@@ -187,7 +183,7 @@ const chart = document.getElementById("chart");
     g.appendChild(tx);
   });
   const ax = el("text", {x: M.l, y: M.t + h + 33, fill: "var(--muted)",
-    "font-size": 10}); ax.textContent = "datum (podeoci u ponoć)";
+    "font-size": 10}); ax.textContent = "date (ticks at midnight)";
   g.appendChild(ax);
   D.frames.forEach(f => g.appendChild(el("line", {
     x1: X(f.t), x2: X(f.t), y1: Y(0), y2: Y(f.pw),
@@ -199,7 +195,7 @@ const chart = document.getElementById("chart");
       stroke: "var(--muted)", "stroke-width": 1.5, "stroke-dasharray": "4 3"}));
     const lb = el("text", {x: X(D.tEnd) - 5, y: M.t + 9, "text-anchor": "end",
       fill: "var(--muted)", "font-size": 10});
-    lb.textContent = "poslednji perimetar";
+    lb.textContent = "last perimeter";
     g.appendChild(lb);
   }
   window.__mark = el("line", {y1: M.t, y2: M.t + h, stroke: "var(--text-1)",
@@ -211,24 +207,24 @@ const chart = document.getElementById("chart");
 // --- panel sa energijom ---------------------------------------------------
 (function () {
   const F = D.fre; if (!F) return;
-  const num = (v, d) => v.toLocaleString("sr-RS", {maximumFractionDigits: d});
+  const num = (v, d) => v.toLocaleString("en-GB", {maximumFractionDigits: d});
   document.getElementById("f-tj").innerHTML =
     num(F.tj, 1) + '<span class="u"> TJ</span>';
   document.getElementById("f-t").innerHTML =
-    fmt(F.tons) + '<span class="u"> t suve biomase</span>';
+    fmt(F.tons) + '<span class="u"> t dry biomass</span>';
   document.getElementById("f-rng").textContent =
-    F.rng ? "po platformama: " + F.rng + " TJ (razlika je doba prolaza, "
-          + "ne nesigurnost)" : "";
+    F.rng ? "by platform: " + F.rng + " TJ (the spread reflects overpass time of day, "
+          + "not uncertainty)" : "";
   document.getElementById("f-ha").textContent =
-    F.areaHa ? num(F.perHa, 1) + " t/ha na " + fmt(F.areaHa) + " ha" : "";
+    F.areaHa ? num(F.perHa, 1) + " t/ha over " + fmt(F.areaHa) + " ha" : "";
   document.getElementById("f-note").innerHTML =
-    "Integral snage od paljenja do t = " + num(D.tEnd, 0) +
-    " h (" + F.src + "), preko " + F.nPass + " prolaza. " +
-    "Satelit područje vidi samo pri prolazu, a između prolaza se snaga " +
-    "interpolira — " + F.gapPct + " % integrala potiče iz praznina dužih od 8 h " +
-    "(najduža " + num(F.maxGap, 1) + " h). <b>Ovo je zato donja granica " +
-    "oslobođene energije, ne zatvoren bilans.</b> Biomasa je preračun sa " +
-    "0,368 kg/MJ (Wooster i sar., 2005) i nosi rasipanje reda ±50 %.";
+    "Integral of power from ignition to t = " + num(D.tEnd, 0) +
+    " h (" + F.src + "), over " + F.nPass + " overpasses. " +
+    "Polar-orbiting satellites see the area only at overpass; between overpasses power is " +
+    "interpolated — " + F.gapPct + " % of the integral comes from gaps longer than 8 h " +
+    "(longest " + num(F.maxGap, 1) + " h). <b>This is therefore a lower bound " +
+    "on released energy, not a closed budget.</b> Biomass is a conversion at " +
+    "0.368 kg/MJ (Wooster et al., 2005) and carries a scatter of about ±50 %.";
 })();
 
 // --- traka skale ----------------------------------------------------------
@@ -246,7 +242,7 @@ const chart = document.getElementById("chart");
   // preklopljeni brojevi ne znače ništa. Krajevi opsega imaju prednost.
   const YY = v => by + bh - (lg(v) - L0) / (L1 - L0) * bh;
   const lab = v => v >= 10 ? fmt(v)
-    : v.toLocaleString("sr-RS", {maximumFractionDigits: v < 1 ? 2 : 1});
+    : v.toLocaleString("en-GB", {maximumFractionDigits: v < 1 ? 2 : 1});
   const round = [];
   for (let e = -2; e <= 4; e++) for (const m of [1, 2, 5]) {
     const v = m * Math.pow(10, e);
@@ -265,7 +261,7 @@ const chart = document.getElementById("chart");
     c.appendChild(t);
   });
   const u = el("text", {x: bx, y: by + bh + 22, fill: "var(--muted)",
-    "font-size": 11}); u.textContent = "MW po detekciji";
+    "font-size": 11}); u.textContent = "MW per detection";
   c.appendChild(u);
 })();
 
@@ -294,10 +290,10 @@ const chart = document.getElementById("chart");
   if (D.perim) m.appendChild(el("path", {d: D.perim, fill: "none",
     stroke: "#52514e", "stroke-width": 1, opacity: .5}));
 
-  const num = (v, d) => v.toLocaleString("sr-RS", {maximumFractionDigits: d});
+  const num = (v, d) => v.toLocaleString("en-GB", {maximumFractionDigits: d});
   document.getElementById("d-sub").textContent =
-    "MW po kvadratnom kilometru · mreža " + S.res + " m · " +
-    fmt(S.cells) + " osmotrenih ćelija · vrh " + fmt(S.peak) + " MW/km²";
+    "MW per square kilometre · grid " + S.res + " m · " +
+    fmt(S.cells) + " observed cells · peak " + fmt(S.peak) + " MW/km²";
 
   // vodoravna traka skale, iste boje i ista log skala kao gore
   const c = document.getElementById("dbar");
@@ -328,16 +324,16 @@ const chart = document.getElementById("chart");
   });
   const u = el("text", {x: bx + bw + 12, y: by + bh - 1, fill: "var(--muted)",
     "font-size": 11});
-  u.textContent = "MW/km², logaritamska skala";
+  u.textContent = "MW/km², logarithmic scale";
   c.appendChild(u);
 
   document.getElementById("d-note").innerHTML =
-    "Svaka detekcija oboji <b>svoj otisak</b> (scan × track iz FIRMS-a), a " +
-    "ćelija zadrži najveću vrednost koju je ijedan prolaz na njoj izmerio — " +
-    "ništa se ne interpolira između detekcija. Deli se površinom piksela jer " +
-    "isti požar daje veći FRP kad satelit gleda ukoso, pa bi mapa sirovog FRP-a " +
-    "delom crtala geometriju osmatranja. Tipična ćelija je viđena " + S.obs +
-    " puta; gde je prolaza bilo malo, maksimum je slabije određen.";
+    "Each detection colours <b>its own footprint</b> (scan × track from FIRMS), and " +
+    "a cell keeps the highest value any overpass measured on it — " +
+    "nothing is interpolated between detections. Values are divided by pixel area because " +
+    "the same fire yields a higher FRP when viewed obliquely, so a map of raw FRP " +
+    "would partly draw the viewing geometry. A typical cell was observed " + S.obs +
+    " times; where overpasses were few, the maximum is less well determined.";
 })();
 
 // --- kadrovi --------------------------------------------------------------
@@ -355,7 +351,7 @@ function show(i) {
   document.getElementById("stamp").innerHTML =
     f.lbl + " <small>(" + f.utc + " UTC)</small>";
   document.getElementById("cap").textContent =
-    "prolaz " + (idx + 1) + " od " + D.frames.length;
+    "overpass " + (idx + 1) + " of " + D.frames.length;
   document.getElementById("t-n").textContent = fmt(f.n);
   document.getElementById("t-sum").innerHTML = fmt(f.pw) + '<span class="u"> MW</span>';
   document.getElementById("t-max").innerHTML = fmt(f.max) + '<span class="u"> MW</span>';
@@ -365,10 +361,10 @@ function show(i) {
   window.__mark.setAttribute("x2", window.__X(f.t));
 }
 function stop() { if (timer) { clearInterval(timer); timer = null; }
-  document.getElementById("play").textContent = "▶ Pusti"; }
+  document.getElementById("play").textContent = "▶ Play"; }
 document.getElementById("play").onclick = () => {
   if (timer) return stop();
-  document.getElementById("play").textContent = "❚❚ Pauza";
+  document.getElementById("play").textContent = "❚❚ Pause";
   timer = setInterval(() => {
     if (idx >= D.frames.length - 1) { show(0); } else { show(idx + 1); }
   }, 450);

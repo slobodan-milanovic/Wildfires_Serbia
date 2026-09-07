@@ -1,15 +1,16 @@
 cff-version: 1.2.0
 message: "Ako koristite ove rezultate, citirajte ovako."
-title: "Deliblatska pescara 2026 — rekonstrukcija širenja požara iz satelitskih podataka"
+title: "Deliblatska peščara 2026 — rekonstrukcija širenja požara iz satelitskih podataka, 5. – 28. 8. 2026"
 abstract: >-
   Rekonstrukcija vremena dolaska vatre, brzine širenja, snage zračenja i
-  ukupne oslobođene energije za požar na Deliblatskoj peščari, avgust 2026,
-  po NERO metodologiji.
+  ukupne oslobođene energije za požar Deliblatska peščara 2026, analizirani period
+  2026-08-05 10:51 – 2026-08-28 23:59 UTC (5–28 August 2026), po NERO metodologiji. Kasnije
+  reaktivacije istog požarišta nisu obuhvaćene.
 authors:
-  - family-names: POPUNITI
-    given-names: POPUNITI
-    affiliation: POPUNITI
-    # orcid: "https://orcid.org/0000-0000-0000-0000"
+  - family-names: "Milanović"
+    given-names: "Slobodan"
+    affiliation: "University of Belgrade – Faculty of Forestry, Belgrade, Serbia"
+    orcid: "https://orcid.org/0000-0002-8260-999X"
 keywords:
   - wildfire
   - fire behaviour
@@ -18,4 +19,50 @@ keywords:
   - Deliblato Sands
   - Serbia
 license: CC-BY-4.0
-date-released: POPUNITI
+date-released: 2026-09-07
+references:
+  - type: slides
+    title: "Practical tools to reconstruct wildfire spread"
+    authors:
+      - family-names: "Benali"
+        given-names: "Akli"
+        affiliation: "University of Lisbon"
+      - family-names: "Campos"
+        given-names: "Marcos"
+        affiliation: "Força Especial de Proteção Civil"
+    year: 2024
+    conference:
+      name: "NERO Café webinar, COST Action CA22164 — NERO, European Network on Extreme Fire Behavior"
+    url: "https://nero-network.eu"
+    notes: "Metodologija na osnovu koje je aplikacija za rekonstrukciju razvijena."
+  - type: article
+    title: "The Portuguese Large Wildfire Spread database (PT-FireSprd)"
+    authors:
+      - family-names: "Benali"
+        given-names: "Akli"
+      - family-names: "Guiomar"
+        given-names: "Nuno"
+      - family-names: "Gonçalves"
+        given-names: "Hugo"
+      - family-names: "Mota"
+        given-names: "Bernardo"
+      - family-names: "Silva"
+        given-names: "Fábio"
+      - family-names: "Fernandes"
+        given-names: "Paulo M."
+      - family-names: "Mota"
+        given-names: "Carlos"
+      - family-names: "Penha"
+        given-names: "Alexandre"
+      - family-names: "Santos"
+        given-names: "João"
+      - family-names: "Pereira"
+        given-names: "José M. C."
+      - family-names: "Sá"
+        given-names: "Ana C. L."
+    journal: "Earth System Science Data"
+    volume: 15
+    start: 3791
+    end: 3818
+    year: 2023
+    doi: "10.5194/essd-15-3791-2023"

@@ -32,4 +32,8 @@ was derived from. Those keep their own terms and must be credited:
     acknowledge the use of data from NASA's Fire Information for Resource
     Management System (FIRMS), part of NASA's Earth Science Data and
     Information System (ESDIS).
+  * MTG FCI fire radiative power (Meteosat-12, 10 min): EUMETSAT LSA SAF
+    (2025), MTG Fire Radiative Power - Pixel, V.1 (MTFRPPIXEL, LSA-509),
+    developed by King's College London, accessed via EUMETView.
+    © EUMETSAT, licensed under CC BY 4.0.
   * ERA5 reanalysis (ECMWF / Copernicus Climate Change Service).

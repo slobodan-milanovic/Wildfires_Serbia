@@ -1,10 +1,9 @@
-# Deliblato Sands 2026 — wildfire spread reconstruction, 5–28 August 2026
+# Deliblato Sands 2026 — wildfire spread reconstruction, 5 August – 17 September 2026
 
 *Srpska verzija je ispod. / Serbian version below.*
 
-**Period analysed: 2026-08-05 10:51 – 2026-08-28 23:59 UTC** (5–28 August 2026).
-The reconstruction covers this period only; later reactivations of the same
-burn area are not included.
+**Period analysed: 2026-08-05 10:51 – 2026-09-17 23:59 UTC** (5 August – 17 September 2026).
+The period includes the reactivation of 5–7 September 2026 inside the burn area; the fire was localised on 15 September. Time of arrival records only the first arrival of fire, so re-burning of already burned ground appears in fire radiative power, not in the isochrones.
 
 Static page with the results of a satellite-based reconstruction of wildfire
 spread. Open `index.html` (SR/EN switch in the top-right corner) or the
@@ -28,7 +27,7 @@ CA22164 — NERO, European Network on Extreme Fire Behavior), and of the
 published work of the same group, above all the PT-FireSprd database (Benali
 et al., 2023). Fire arrival time is interpolated from thermal detections (NASA
 FIRMS) and constrained by dated perimeters from Sentinel-2/3 imagery and the
-manual Copernicus EMS delineation. Burned area: 12,344 ha.
+manual Copernicus EMS delineation. Thermal detections (VIIRS, MODIS and the 10-min MTG FCI) also veto an optical “not yet burned” constraint where fire was detected before the image (smoke-obscured scenes). Burned area: 13,012 ha.
 
 - Benali, A. & Campos, M. (2024). *Practical tools to reconstruct wildfire
   spread.* NERO Café webinar, COST Action CA22164 — NERO, European Network on
@@ -42,11 +41,15 @@ manual Copernicus EMS delineation. Burned area: 12,344 ha.
 
 - Contains modified Copernicus Sentinel data (2026), processed by the authors.
 - Thermal anomalies: NASA FIRMS (MODIS, VIIRS).
+- MTG FCI fire radiative power (10 min): EUMETSAT LSA SAF (2025), MTG Fire Radiative Power - Pixel, V.1 (MTFRPPIXEL), accessed via EUMETView; CC BY 4.0.
 - Final perimeter derived from the Copernicus EMS Rapid Mapping delineation
   (EMSR914). © European Union, Copernicus Emergency Management Service. Only
   derived vector layers are published; the very-high-resolution image
   background is not redistributed.
 - Elevation: Copernicus DEM GLO-30.
+
+[![Developed with Claude](https://img.shields.io/badge/Developed%20with-Claude-D97757?logo=claude&logoColor=white)](https://claude.ai)  
+The application was developed with the assistance of Claude (Anthropic).
 
 **Data.** Geospatial results (GeoPackage, TOA raster, metrics.csv) are not in
 this repository because of their size — they are archived separately, with a
@@ -54,11 +57,10 @@ DOI.
 
 ---
 
-# Deliblatska peščara 2026 — rekonstrukcija širenja požara, 5. – 28. 8. 2026.
+# Deliblatska peščara 2026 — rekonstrukcija širenja požara, 5. 8. – 17. 9. 2026.
 
-**Analizirani period: 2026-08-05 10:51 – 2026-08-28 23:59 UTC** (5–28 August 2026).
-Rekonstrukcija obuhvata isključivo taj period; kasnije reaktivacije istog
-požarišta nisu uključene.
+**Analizirani period: 2026-08-05 10:51 – 2026-09-17 23:59 UTC** (5 August – 17 September 2026).
+Period obuhvata i reaktivaciju od 5–7. septembra 2026. unutar požarišta; požar je lokalizovan 15. septembra. Vreme dolaska vatre beleži samo prvi dolazak, pa se ponovno gorenje već izgorele površine vidi u snazi zračenja, a ne u izohronama.
 
 Statična stranica sa rezultatima rekonstrukcije širenja požara iz satelitskih
 podataka. Otvori `index.html` (prekidač SR/EN gore desno) ili objavljenu
@@ -81,17 +83,20 @@ to reconstruct wildfire spread* (maj 2024, COST Action CA22164 — NERO), i
 objavljenih radova iste grupe, pre svega baze PT-FireSprd (Benali i sar., 2023).
 Vreme dolaska vatre interpolira se iz termalnih detekcija (NASA FIRMS), a
 ograničava datiranim perimetrima iz Sentinel-2/3 snimaka i ručne delineacije
-Copernicus EMS-a. Opožarena površina: 12.344 ha.
+Copernicus EMS-a. Termalne detekcije (VIIRS, MODIS i MTG FCI na 10 min) poništavaju optičko „još nije gorelo“ tamo gde je vatra viđena pre snimka (scene pod dimom). Opožarena površina: 13.012 ha.
 
 **Izvori i atribucija**
 
 - Sadrži izmenjene Copernicus Sentinel podatke (2026), obrađene od strane autora.
 - Termalne anomalije: NASA FIRMS (MODIS, VIIRS).
+- MTG FCI snaga zračenja požara (10 min): EUMETSAT LSA SAF (2025), MTG Fire Radiative Power - Pixel, V.1 (MTFRPPIXEL), preko EUMETView-a; CC BY 4.0.
 - Finalni perimetar izveden iz Copernicus EMS Rapid Mapping delineacije
   (EMSR914). © European Union, Copernicus Emergency Management Service.
   Objavljeni su samo izvedeni vektorski slojevi; podloga sa snimka vrlo visoke
   rezolucije nije redistribuirana.
 - Nadmorska visina: Copernicus DEM GLO-30.
+
+Aplikacija je razvijena uz pomoć Claude-a (Anthropic).
 
 **Podaci.** Geoprostorni rezultati (GeoPackage, TOA raster, metrics.csv) nisu u
 ovom repozitorijumu zbog veličine — arhiviraju se posebno, sa DOI-jem.

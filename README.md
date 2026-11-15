@@ -14,7 +14,7 @@ metodologiji.*
 
 | Fire · Požar | Period | Site · Sajt |
 |---|---|---|
-| Deliblato Sands · Deliblatska peščara | 5–28 August 2026 | [deliblato2026](https://slobodan-milanovic.github.io/Wildfires_Serbia/deliblato2026/) |
+| Deliblato Sands · Deliblatska peščara | 5 August – 17 September 2026 | [deliblato2026](https://slobodan-milanovic.github.io/Wildfires_Serbia/deliblato2026/) |
 
 Each folder is a self-contained static site (SR/EN switch in the top-right
 corner) with an interactive fire radiative power page, a fire behaviour

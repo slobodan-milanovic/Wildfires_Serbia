@@ -1,5 +1,7 @@
 # Wildfires_Serbia
 
+[![Developed with Claude](https://img.shields.io/badge/Developed%20with-Claude-D97757?logo=claude&logoColor=white)](https://claude.ai)
+
 Satellite-based reconstructions of wildfire spread in Serbia — fire arrival
 time, rate of spread, fire radiative power and released energy — following the
 NERO methodology (Benali & Campos, COST Action CA22164).
@@ -37,6 +39,10 @@ the published work of the same group, above all the PT-FireSprd database.
   Mota, C., Penha, A., Santos, J., Pereira, J. M. C. & Sá, A. C. L. (2023). The
   Portuguese Large Wildfire Spread database (PT-FireSprd). *Earth System Science
   Data*, 15, 3791–3818. https://doi.org/10.5194/essd-15-3791-2023
+
+The application was developed with the assistance of Claude (Anthropic).
+
+*Aplikacija je razvijena uz pomoć Claude-a (Anthropic).*
 
 ## Data · Podaci
 
